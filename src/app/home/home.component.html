@@ -1,1 +1,59 @@
-<p>home works!</p>
+<!-- home.component.html -->
+<div class="home-container">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>Discover the World of Pokémon</h1>
+        <p>Welcome to your PokémonDex - a comprehensive source of information about all Pokémon.</p>
+        <div class="hero-buttons">
+          <a routerLink="/pokemon-list" class="explore-btn">Explore Pokémon</a>
+          <button class="random-btn">Random Pokémon</button>
+        </div>
+      </div>
+      <div class="pokeball-decoration"></div>
+    </div>
+  
+    <div class="features-section">
+      <h2>Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon search-icon"></div>
+          <h3>Search</h3>
+          <p>Find Pokémon by name, type, or characteristic.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon info-icon"></div>
+          <h3>Detailed Information</h3>
+          <p>Learn about stats, abilities, evolutions, and more.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon team-icon"></div>
+          <h3>Create Teams</h3>
+          <p>Build and save your ideal Pokémon team.</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="featured-pokemon">
+      <h2>Featured Pokémon</h2>
+      <div class="pokemon-cards">
+        <div class="pokemon-card" *ngFor="let pokemon of featuredPokemon">
+          <div class="pokemon-image">
+            <img [src]="pokemon.image" [alt]="pokemon.name">
+          </div>
+          <div class="pokemon-info">
+            <h3>{{pokemon.name}}</h3>
+            <p class="pokemon-type">{{pokemon.type}}</p>
+            <a [routerLink]="['/pokemon', pokemon.id]" class="view-details">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="cta-section">
+      <div class="cta-content">
+        <h2>Ready to Start Your Adventure?</h2>
+        <p>Discover all the Pokémon in the world and learn everything about them.</p>
+        <a routerLink="/pokemon-list" class="cta-button">Start the Adventure</a>
+      </div>
+    </div>
+  </div>
