@@ -368,10 +368,10 @@
     color: #666;
     font-size: 0.9rem;
     position: relative;
-    display: inline-block;
-    vertical-align: middle; /* Added for vertical alignment */
-    margin-right: 15px; /* Added space between type and button */
-    margin-bottom: 13px; /* Removed bottom margin */
+    display: block; /* Changed to block for center alignment */
+    margin: 0 auto 15px; /* Center horizontally with bottom margin */
+    text-align: center; /* Ensure text is centered */
+    width: max-content; /* Width based on content */
   }
   
   .pokemon-type::after {
@@ -391,7 +391,7 @@
   }
   
   .view-details {
-    display: inline-block;
+    display: block; /* Changed to block for proper centering */
     padding: 8px 15px;
     background-color: #306cb0;
     color: white;
@@ -401,7 +401,8 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
     position: relative;
     overflow: hidden;
-    vertical-align: middle; /* Added for vertical alignment */
+    margin: 0 auto; /* Center horizontally */
+    width: max-content; /* Width based on content */
   }
   
   .view-details::after {
