@@ -1,8 +1,27 @@
+<!-- 🔍 Search & 🔄 Refresh -->
+<div style="margin: 1rem 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Search Pokémon..."
+    style="padding: 8px; max-width: 300px; width: 100%;"
+  />
+
+  <button (click)="searchPokemon()" style="padding: 8px 12px; background-color: #00b894; color: white;">
+    🔍 Search
+  </button>
+
+  <button (click)="refreshPokemon()" style="padding: 8px 12px; background-color: #3b4cca; color: white;">
+    🔄 Refresh
+  </button>
+</div>
+
 <!-- Pokemon Grid -->
 <div class="pokemon-grid">
     <div
       class="box"
-      *ngFor="let pokemon of pokemon | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalPokemons }"
+      *ngFor="let pokemon of filteredPokemon | paginate: { itemsPerPage: limit, currentPage: page }"
+
     >
       <img [src]="pokemon.sprites.front_default" alt="Pokemon">
       <h3>{{ pokemon.name }}</h3>
@@ -26,5 +45,5 @@
       </p>
     </div>
   </div>
-  
+
  <pagination-controls (pageChange)="page = $event; pokemon = []; getPokemons()" ></pagination-controls>
