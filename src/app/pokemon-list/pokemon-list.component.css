@@ -1,42 +1,55 @@
 /* Pokemon Grid */
 .pokemon-grid {
     display: grid;
-    grid-gap: 30px; /* Increased gap between grid items */
-    padding: 30px; /* Increased padding around the grid */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Slightly larger min width */
+    grid-gap: 20px; /* ปรับระยะห่างระหว่างกล่อง */
+    padding: 20px; /* เพิ่ม padding รอบๆ grid */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* ใช้ auto-fill เพื่อให้กล่องแสดงได้ตามขนาด */
+    background-color: #f8f8f8; /* เพิ่มสีพื้นหลังให้เบาๆ */
+    border-radius: 15px; /* มุมกลมเพื่อให้ดูเรียบๆ */
 }
 
+/* กล่องแต่ละกล่อง */
 .pokemon-grid .box {
-    width: 100%;
     height: auto;
-    padding: 25px; /* Increased padding inside each box */
+    padding: 60px; /* เพิ่ม padding ให้กล่องมีพื้นที่ว่างภายใน */
     border: 1px solid #e0e0e0;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     background-color: #ffffff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto; /* ให้ margin auto เพื่อให้กล่องอยู่ตรงกลาง */
 }
 
+/* เพิ่มระยะห่างระหว่างกล่องเมื่อ hover */
 .pokemon-grid .box:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* การจัดการรูปภาพ */
 .pokemon-grid .box img {
     max-width: 100px;
     height: auto;
-    margin-bottom: 20px; /* Increased margin below the image */
+    margin-bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid #ffcc00;
+    padding: 5px;
+    background-color: #fff;
 }
 
+/* หัวข้อในกล่อง */
 .pokemon-grid .box h3 {
-    margin: 15px 0; /* Increased margin around the heading */
+    margin: 10px 0;
     font-size: 1.25rem;
+    font-weight: bold;
     color: #333;
+    text-transform: capitalize;
 }
 
+/* รายละเอียดในกล่อง */
 .pokemon-grid .box p {
-    margin: 8px 0; /* Increased margin around paragraphs */
+    margin: 8px 0;
     font-size: 0.9rem;
     color: #666;
 }
@@ -44,7 +57,7 @@
 /* Pagination Controls */
 .pagination-controls {
     text-align: center;
-    margin-top: 40px; /* Increased margin above pagination controls */
+    margin-top: 40px; /* เพิ่มระยะห่างด้านบน */
 }
 
 .pagination-controls .ngx-pagination {
@@ -53,27 +66,30 @@
 
 .pagination-controls .ngx-pagination li {
     display: inline-block;
-    margin: 0 8px; /* Increased margin between pagination items */
+    margin: 0 8px;
 }
 
 .pagination-controls .ngx-pagination a {
     text-decoration: none;
-    padding: 10px 15px; /* Increased padding inside pagination links */
+    padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 6px;
     color: #333;
     background-color: #f9f9f9;
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
 }
 
+/* สีของ pagination เมื่อ hover */
 .pagination-controls .ngx-pagination a:hover {
-    background-color: #007bff;
+    background-color: #ffcc00; /* สีที่สื่อถึง Pokémon */
     color: #fff;
-    border-color: #007bff;
+    border-color: #ffcc00;
 }
 
+/* Pagination ที่เป็นปัจจุบัน */
 .pagination-controls .ngx-pagination .current {
-    background-color: #007bff;
+    background-color: #ffcc00; /* สีเดียวกับสี hover */
     color: #fff;
-    border-color: #007bff;
+    border-color: #ffcc00;
 }
