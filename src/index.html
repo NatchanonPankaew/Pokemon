@@ -9,9 +9,8 @@
 </head>
 <body>
   <app-root></app-root>
-
   <script>
-    // 1. การทำให้หน้าเว็บเคลื่อนไหวเมื่อโหลด
+    // 1. Add animation to the page when loaded
     window.onload = function() {
       document.body.style.transition = "opacity 1s";
       document.body.style.opacity = 0;
@@ -20,7 +19,7 @@
       }, 100);
     };
   
-    // 2. การทำให้มีการปรากฏข้อความเมื่อผู้ใช้เลื่อนหน้าจอ
+    // 2. Display message when user scrolls
     document.addEventListener("scroll", function() {
       const scrollY = window.scrollY;
       const scrollMessage = document.getElementById("scrollMessage");
@@ -50,7 +49,7 @@
       }
     });
   
-    // 3. การเพิ่มเอฟเฟกต์ให้ปุ่มเมื่อมีการคลิก
+    // 3. Add effect to button when clicked
     document.querySelectorAll("button").forEach(button => {
       button.addEventListener("click", function() {
         this.style.transform = "scale(1.1)";
@@ -61,7 +60,7 @@
       });
     });
   
-    // 4. การทำให้ปุ่มหรือออบเจกต์ที่มีการ Hover มีเอฟเฟกต์
+    // 4. Add hover effect to buttons or objects
     document.querySelectorAll("button, a").forEach(element => {
       element.addEventListener("mouseover", function() {
         this.style.transition = "all 0.3s ease";
@@ -75,7 +74,7 @@
       });
     });
   
-    // 5. การแสดงผล tooltip เมื่อวางเมาส์
+    // 5. Display tooltip on mouse hover
     document.querySelectorAll("[data-tooltip]").forEach(element => {
       element.addEventListener("mouseover", function(e) {
         const tooltipText = this.getAttribute("data-tooltip");
@@ -94,7 +93,7 @@
         tooltip.style.opacity = 0;
         document.body.appendChild(tooltip);
     
-        // เพิ่มการทำให้ Tooltip ค่อยๆ ปรากฏ
+        // Add fade-in effect to the tooltip
         setTimeout(() => {
           tooltip.style.opacity = 1;
         }, 50);
