@@ -31,6 +31,7 @@
   background-size: 100px 100px;
   opacity: 0.4;
   z-index: -1;
+  animation: floatBackground 40s linear infinite;
 }
 
 /* Optional: Add additional pokeball patterns for more visual interest */
@@ -46,6 +47,7 @@
   opacity: 0.3;
   z-index: -1;
   transform: rotate(-15deg);
+  animation: rotateElement 20s linear infinite;
 }
   
   .hero-content {
@@ -94,12 +96,30 @@
     color: #1a1a1a;
     border: none;
     box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+    animation: pulseButton 2s ease-in-out infinite;
   }
   
   .random-btn {
     background-color: transparent;
     color: #ffffff;
     border: 2px solid #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .random-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.5s ease;
+  }
+  
+  .random-btn:hover::after {
+    left: 100%;
   }
   
   .explore-btn:hover {
@@ -122,6 +142,7 @@
     top: -200px;
     right: -200px;
     z-index: 1;
+    animation: rotateSlow 30s linear infinite;
   }
   
   .pokeball-decoration::after {
@@ -141,12 +162,29 @@
     text-align: center;
     background-color: #f9f9f9;
     color: #333;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .features-section::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="5" fill="rgba(48, 108, 176, 0.03)"/></svg>');
+    background-repeat: repeat;
+    z-index: 0;
+    opacity: 0.5;
+    animation: floatBackground 60s linear infinite;
   }
   
   .features-section h2 {
     margin-bottom: 40px;
     font-size: 2.2rem;
     color: #306cb0;
+    position: relative;
   }
   
   .features-grid {
@@ -156,6 +194,7 @@
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
   }
   
   .feature-card {
@@ -167,6 +206,8 @@
     min-width: 250px;
     max-width: 350px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
   }
   
   .feature-card:hover {
@@ -183,6 +224,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .feature-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 60%, rgba(48, 108, 176, 0.15) 100%);
+    animation: pulseIcon 2.5s ease-in-out infinite;
   }
   
   .feature-card h3 {
@@ -201,12 +254,39 @@
     padding: 80px 20px;
     text-align: center;
     background: linear-gradient(to right, #fcfcfc, #f0f0f0);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .featured-pokemon::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 200px;
+    height: 200px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" stroke="rgba(48, 108, 176, 0.07)" stroke-width="10" fill="none"/><circle cx="100" cy="100" r="30" stroke="rgba(48, 108, 176, 0.1)" stroke-width="6" fill="rgba(48, 108, 176, 0.03)"/><line x1="10" y1="100" x2="190" y2="100" stroke="rgba(48, 108, 176, 0.07)" stroke-width="4"/></svg>');
+    opacity: 0.2;
+    animation: floatElement 20s ease-in-out infinite alternate;
+  }
+  
+  .featured-pokemon::after {
+    content: "";
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 250px;
+    height: 250px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 250 250"><circle cx="125" cy="125" r="115" stroke="rgba(48, 108, 176, 0.07)" stroke-width="10" fill="none"/><circle cx="125" cy="125" r="40" stroke="rgba(48, 108, 176, 0.1)" stroke-width="6" fill="rgba(48, 108, 176, 0.03)"/><line x1="10" y1="125" x2="240" y2="125" stroke="rgba(48, 108, 176, 0.07)" stroke-width="4"/></svg>');
+    opacity: 0.2;
+    animation: floatElement 15s ease-in-out infinite alternate-reverse;
   }
   
   .featured-pokemon h2 {
     margin-bottom: 40px;
     font-size: 2.2rem;
     color: #306cb0;
+    position: relative;
   }
   
   .pokemon-cards {
@@ -216,6 +296,8 @@
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
   
   .pokemon-card {
@@ -225,6 +307,7 @@
     width: 300px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease;
+    position: relative;
   }
   
   .pokemon-card:hover {
@@ -238,12 +321,32 @@
     justify-content: center;
     background: linear-gradient(135deg, #e6f2ff 0%, #d9e9ff 100%);
     padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .pokemon-image::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(231,240,253,0) 70%);
+    top: -50%;
+    left: -50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .pokemon-card:hover .pokemon-image::before {
+    opacity: 0.4;
+    animation: shimmer 2s ease-in-out;
   }
   
   .pokemon-image img {
     max-height: 150px;
     max-width: 150px;
     transition: transform 0.3s ease;
+    animation: float 3s ease-in-out infinite;
   }
   
   .pokemon-card:hover .pokemon-image img {
@@ -263,8 +366,28 @@
   
   .pokemon-type {
     color: #666;
-    margin-bottom: 15px;
     font-size: 0.9rem;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle; /* Added for vertical alignment */
+    margin-right: 15px; /* Added space between type and button */
+    margin-bottom: 13px; /* Removed bottom margin */
+  }
+  
+  .pokemon-type::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #306cb0;
+    transition: width 0.3s ease;
+  }
+  
+  .pokemon-card:hover .pokemon-type::after {
+    width: 80%;
   }
   
   .view-details {
@@ -275,7 +398,25 @@
     text-decoration: none;
     border-radius: 20px;
     font-size: 0.9rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    vertical-align: middle; /* Added for vertical alignment */
+  }
+  
+  .view-details::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.5s ease;
+  }
+  
+  .view-details:hover::after {
+    left: 100%;
   }
   
   .view-details:hover {
@@ -311,6 +452,7 @@
     background-size: 100px 100px;
     opacity: 0.4;
     z-index: -1;
+    animation: floatBackground 50s linear infinite reverse;
   }
   
   /* Optional: Add additional pokeball patterns for more visual interest */
@@ -326,11 +468,25 @@
     opacity: 0.3;
     z-index: -1;
     transform: rotate(-15deg);
+    animation: rotateElement 25s linear infinite reverse;
   }
   
   .cta-content {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+  }
+  
+  .cta-content::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    top: -100px;
+    left: -100px;
+    animation: pulse 5s ease-in-out infinite alternate;
   }
   
   .cta-section h2 {
@@ -356,6 +512,24 @@
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: pulseButton 2s ease-in-out infinite;
+  }
+  
+  .cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.5s ease;
+  }
+  
+  .cta-button:hover::after {
+    left: 100%;
   }
   
   .cta-button:hover {
@@ -368,6 +542,51 @@
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes floatElement {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(20px, 20px); }
+  }
+  
+  @keyframes floatBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+  }
+  
+  @keyframes pulseButton {
+    0%, 100% { box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(255, 204, 0, 0.5); }
+  }
+  
+  @keyframes pulseIcon {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+  }
+  
+  @keyframes rotateElement {
+    0% { transform: rotate(-15deg); }
+    100% { transform: rotate(345deg); }
+  }
+  
+  @keyframes rotateSlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 0.3; transform: scale(0.9); }
+    100% { opacity: 0.6; transform: scale(1.1); }
   }
   
   /* Icon styles */
