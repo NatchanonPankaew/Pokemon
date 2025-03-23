@@ -110,6 +110,263 @@
       });
     });
     
+    // Pokemon Types and Species Management Script
+// Add this to your index.html in a script tag or include as a separate JS file
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Define all Pokemon types
+  const pokemonTypes = [
+    'Normal', 'Fire', 'Water', 'Grass', 'Electric', 'Ice',
+    'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug',
+    'Rock', 'Ghost', 'Dark', 'Dragon', 'Steel', 'Fairy'
+  ];
+  
+  // Define Pokemon regions/generations
+  const pokemonRegions = [
+    { name: 'Kanto', gen: 'I' },
+    { name: 'Johto', gen: 'II' },
+    { name: 'Hoenn', gen: 'III' },
+    { name: 'Sinnoh', gen: 'IV' },
+    { name: 'Unova', gen: 'V' },
+    { name: 'Kalos', gen: 'VI' },
+    { name: 'Alola', gen: 'VII' },
+    { name: 'Galar', gen: 'VIII' },
+    { name: 'Paldea', gen: 'IX' }
+  ];
+
+  // Type effectiveness matrix (simplified)
+  const typeEffectiveness = {
+    'Normal': { 'Rock': 0.5, 'Ghost': 0, 'Steel': 0.5 },
+    'Fire': { 'Fire': 0.5, 'Water': 0.5, 'Grass': 2, 'Ice': 2, 'Bug': 2, 'Rock': 0.5, 'Dragon': 0.5, 'Steel': 2 },
+    'Water': { 'Fire': 2, 'Water': 0.5, 'Grass': 0.5, 'Ground': 2, 'Rock': 2, 'Dragon': 0.5 },
+    // Additional type effectiveness data would go here
+  };
+
+  // ======= Main Type Functions =======
+
+  // Apply type styling to an element based on Pokemon type
+  function applyTypeStyle(element, type, styleType = 'background') {
+    if (!element || !type) return null;
+    
+    const typeLower = type.toLowerCase();
+    
+    // Remove previous type classes if needed
+    if (element.getAttribute('data-has-type-style') === 'true') {
+      element.classList.remove(
+        ...Array.from(element.classList).filter(cls => 
+          cls.startsWith('type-') || 
+          cls.startsWith('bg-gradient-') ||
+          cls.startsWith('text-') ||
+          cls.startsWith('border-')
+        )
+      );
+    }
+    
+    // Apply styling based on styleType parameter
+    switch(styleType) {
+      case 'background':
+        element.classList.add(`type-${typeLower}`);
+        break;
+      case 'gradient':
+        element.classList.add(`bg-gradient-${typeLower}`);
+        break;
+      case 'text':
+        element.classList.add(`text-${typeLower}`);
+        break;
+      case 'border':
+        element.classList.add(`border-${typeLower}`);
+        break;
+      case 'badge':
+        element.classList.add(`type-badge`, `type-${typeLower}`);
+        break;
+      case 'box':
+        element.classList.add(`type-box`, `type-${typeLower}`);
+        break;
+      default:
+        element.classList.add(`type-${typeLower}`);
+    }
+    
+    // Mark the element as having type styling
+    element.setAttribute('data-has-type-style', 'true');
+    
+    return element; // For chaining
+  }
+
+  // Create a type badge element
+  function createTypeBadge(type) {
+    if (!type || !pokemonTypes.includes(type)) return null;
+    
+    const badge = document.createElement('div');
+    badge.className = `type-badge type-${type.toLowerCase()}`;
+    badge.textContent = type;
+    return badge;
+  }
+
+  // Create a region/generation badge
+  function createRegionBadge(region) {
+    if (!region) return null;
+    
+    const regionData = pokemonRegions.find(r => 
+      r.name.toLowerCase() === region.toLowerCase()
+    );
+    
+    if (!regionData) return null;
+    
+    const badge = document.createElement('div');
+    badge.className = `species-badge species-${regionData.name.toLowerCase()}`;
+    badge.textContent = regionData.name;
+    badge.setAttribute('title', `Generation ${regionData.gen}`);
+    
+    return badge;
+  }
+
+  // Get effective types against a Pokemon (for team building)
+  function getEffectiveTypes(pokemonTypes) {
+    if (!pokemonTypes || !pokemonTypes.length) return [];
+    
+    // Calculate combined effectiveness based on all types
+    const effectiveness = {};
+    
+    pokemonTypes.forEach(type => {
+      if (typeEffectiveness[type]) {
+        Object.keys(typeEffectiveness[type]).forEach(defType => {
+          if (!effectiveness[defType]) {
+            effectiveness[defType] = typeEffectiveness[type][defType];
+          } else {
+            effectiveness[defType] *= typeEffectiveness[type][defType];
+          }
+        });
+      }
+    });
+    
+    // Return types that are super effective (effectiveness > 1)
+    return Object.keys(effectiveness).filter(type => effectiveness[type] > 1);
+  }
+
+  // Get resistances for a Pokemon (for team building)
+  function getResistances(pokemonTypes) {
+    if (!pokemonTypes || !pokemonTypes.length) return [];
+    
+    // Calculate combined effectiveness based on all types
+    const effectiveness = {};
+    
+    pokemonTypes.forEach(type => {
+      if (typeEffectiveness[type]) {
+        Object.keys(typeEffectiveness[type]).forEach(defType => {
+          if (!effectiveness[defType]) {
+            effectiveness[defType] = typeEffectiveness[type][defType];
+          } else {
+            effectiveness[defType] *= typeEffectiveness[type][defType];
+          }
+        });
+      }
+    });
+    
+    // Return types that the Pokemon resists (effectiveness < 1)
+    return Object.keys(effectiveness).filter(type => effectiveness[type] < 1);
+  }
+
+  // ======= Auto-Apply Type Styling =======
+  
+  // Auto-apply type styling to elements with data-pokemon-type attribute
+  function initializeTypeElements() {
+    // Apply type styling to elements with data-pokemon-type attribute
+    document.querySelectorAll('[data-pokemon-type]').forEach(element => {
+      const type = element.getAttribute('data-pokemon-type');
+      const styleType = element.getAttribute('data-style-type') || 'background';
+      
+      if (type && pokemonTypes.includes(type)) {
+        applyTypeStyle(element, type, styleType);
+      }
+    });
+    
+    // Create type badges for elements with data-type-badge attribute
+    document.querySelectorAll('[data-type-badge]').forEach(element => {
+      const types = element.getAttribute('data-type-badge').split(',');
+      
+      // Clear existing content if requested
+      if (element.getAttribute('data-clear-content') === 'true') {
+        element.innerHTML = '';
+      }
+      
+      // Create and append type badges
+      types.forEach(type => {
+        const trimmedType = type.trim();
+        if (pokemonTypes.includes(trimmedType)) {
+          const badge = createTypeBadge(trimmedType);
+          if (badge) {
+            element.appendChild(badge);
+          }
+        }
+      });
+    });
+    
+    // Create region badges for elements with data-region-badge attribute
+    document.querySelectorAll('[data-region-badge]').forEach(element => {
+      const region = element.getAttribute('data-region-badge');
+      
+      // Clear existing content if requested
+      if (element.getAttribute('data-clear-content') === 'true') {
+        element.innerHTML = '';
+      }
+      
+      // Create and append region badge
+      const badge = createRegionBadge(region);
+      if (badge) {
+        element.appendChild(badge);
+      }
+    });
+  }
+
+  // Watch for DOM changes to apply type styling to dynamically added elements
+  function observeDOMChanges() {
+    const observer = new MutationObserver(mutations => {
+      let shouldInitialize = false;
+      
+      mutations.forEach(mutation => {
+        if (mutation.type === 'childList' && mutation.addedNodes.length) {
+          mutation.addedNodes.forEach(node => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              // Check if the added element or its children have type attributes
+              if (
+                node.hasAttribute('data-pokemon-type') ||
+                node.hasAttribute('data-type-badge') ||
+                node.hasAttribute('data-region-badge') ||
+                node.querySelector('[data-pokemon-type], [data-type-badge], [data-region-badge]')
+              ) {
+                shouldInitialize = true;
+              }
+            }
+          });
+        }
+      });
+      
+      if (shouldInitialize) {
+        initializeTypeElements();
+      }
+    });
+    
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+  // Initialize type styling on page load
+  initializeTypeElements();
+  observeDOMChanges();
+
+  // Make functions available globally
+  window.PokemonTyping = {
+    applyTypeStyle,
+    createTypeBadge,
+    createRegionBadge,
+    getEffectiveTypes,
+    getResistances,
+    types: pokemonTypes,
+    regions: pokemonRegions
+  };
+});
   </script>
 </body>
 </html>

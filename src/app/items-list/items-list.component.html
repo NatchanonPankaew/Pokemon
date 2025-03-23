@@ -1,26 +1,16 @@
-<div style="margin: 1rem 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-  <!-- 🔍 Input ค้นหา -->
+<div class="item-search-container">
   <input
     type="text"
     [(ngModel)]="searchTerm"
     placeholder="Search Items..."
-    style="padding: 8px; max-width: 300px; width: 100%;"
+    class="item-search-input"
+    (keyup.enter)="searchItems()"
   />
-
-  <!-- ✅ ปุ่ม Search -->
-  <button
-    (click)="searchItems()"
-    style="padding: 8px 12px; background-color: #00b894; color: white; border: none; border-radius: 4px; cursor: pointer;"
-  >
-    🔍 Search
+  <button (click)="searchItems()" class="item-button search-button">
+    <span>🔍</span> Search
   </button>
-
-  <!-- 🔄 ปุ่ม Refresh -->
-  <button
-    (click)="refreshItems()"
-    style="padding: 8px 12px; background-color: #3b4cca; color: white; border: none; border-radius: 4px; cursor: pointer;"
-  >
-    🔄 Refresh
+  <button (click)="refreshItems()" class="item-button refresh-button">
+    <span>🔄</span> Refresh
   </button>
 </div>
 

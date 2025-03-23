@@ -1,18 +1,17 @@
 <!-- 🔍 Search & 🔄 Refresh -->
-<div style="margin: 1rem 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+<div class="pokemon-search-container">
   <input
     type="text"
     [(ngModel)]="searchTerm"
     placeholder="Search Pokémon..."
-    style="padding: 8px; max-width: 300px; width: 100%;"
+    class="pokemon-search-input"
+    (keyup.enter)="searchPokemon()"
   />
-
-  <button (click)="searchPokemon()" style="padding: 8px 12px; background-color: #00b894; color: white;">
-    🔍 Search
+  <button (click)="searchPokemon()" class="pokemon-button search-button">
+    <span>🔍</span> Search
   </button>
-
-  <button (click)="refreshPokemon()" style="padding: 8px 12px; background-color: #3b4cca; color: white;">
-    🔄 Refresh
+  <button (click)="refreshPokemon()" class="pokemon-button refresh-button">
+    <span>🔄</span> Refresh
   </button>
 </div>
 

@@ -1,68 +1,284 @@
 <!-- team.component.html -->
 <div class="team-container">
-  <h1>My Pokemon Team</h1>
-  <p class="sub">For Generation 6 to 9 (Scarlet/Violet)</p>
+  <header class="team-header">
+    <h1>Pokémon Team Builder</h1>
+    <p class="sub">For Generation 6 to 9 (Scarlet/Violet)</p>
+    <div class="format-selector">
+      <select class="format-dropdown">
+        <option>VGC 2024</option>
+        <option>Singles OU</option>
+        <option>Doubles</option>
+        <option>Battle Stadium</option>
+      </select>
+      <button class="action-button new-team">New Team</button>
+      <button class="action-button save-team">Save Team</button>
+      <button class="action-button import-export">Import/Export</button>
+    </div>
+  </header>
 
   <div class="main-grid">
     <!-- Team Input Area -->
-    <div class="team-input">
+    <div class="team-builder-section">
+      <h2 class="section-title">Build Your Team</h2>
       <div class="team-grid">
-        <div class="team-slot" *ngFor="let slot of team">
-          <select [(ngModel)]="slot.name">
-            <option value="">Name</option>
-            <option *ngFor="let p of pokemonList" [value]="p">{{ p }}</option>
-          </select>
+        <div class="team-slot" *ngFor="let slot of team; let i = index">
+          <div class="pokemon-card" [ngClass]="{'empty-slot': !slot.name, 'pokemon-card-animated': slot.name}">
+            <div class="pokemon-header">
+              <div class="pokemon-sprite" *ngIf="slot.name">
+                <img [src]="'https://play.pokemonshowdown.com/sprites/gen5/' + slot.name.toLowerCase() + '.png'" 
+                     alt="{{slot.name}}" 
+                     onerror="this.src='assets/img/pokemon-placeholder.png';">
+              </div>
+              <div class="pokemon-selector">
+                <select [(ngModel)]="slot.name" (change)="updatePokemonTypes(i)" class="pokemon-select">
+                  <option value="">Select Pokémon</option>
+                  <option *ngFor="let p of pokemonList" [value]="p">{{ p }}</option>
+                </select>
+              </div>
+            </div>
 
-          <div *ngFor="let move of slot.moves; let i = index">
-            <select [(ngModel)]="slot.moves[i]">
-              <option value="">Move</option>
-              <option *ngFor="let m of moveList" [value]="m">{{ m }}</option>
-            </select>
+            <div class="pokemon-details" *ngIf="slot.name">
+              <div class="type-badges">
+                <span *ngFor="let type of slot.types" class="type-badge {{'type-' + type.toLowerCase()}}">{{type}}</span>
+              </div>
+              
+              <div class="ability-item-row">
+                <select [(ngModel)]="slot.ability" class="ability-select">
+                  <option value="">Ability</option>
+                  <option *ngFor="let a of abilityList" [value]="a">{{ a }}</option>
+                </select>
+                
+                <select [(ngModel)]="slot.item" class="item-select">
+                  <option value="">Held Item</option>
+                  <option *ngFor="let i of itemList" [value]="i">{{ i }}</option>
+                </select>
+              </div>
+              
+              <div class="moves-container">
+                <div *ngFor="let move of slot.moves; let j = index" class="move-row">
+                  <select [(ngModel)]="slot.moves[j]" class="move-select">
+                    <option value="">Move {{j+1}}</option>
+                    <option *ngFor="let m of moveList" [value]="m">{{ m }}</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="quick-stats">
+                <div class="stat-column">
+                  <span class="stat-label">HP</span>
+                  <span class="stat-bar" [style.width.%]="getStatPercentage(slot.name, 'hp')"></span>
+                  <span class="stat-value" [ngClass]="getStatValueClass(slot.name, 'hp')">{{ getStatValue(slot.name, 'hp') }}</span>
+                </div>
+                <div class="stat-column">
+                  <span class="stat-label">Atk</span>
+                  <span class="stat-bar" [style.width.%]="getStatPercentage(slot.name, 'attack')"></span>
+                  <span class="stat-value" [ngClass]="getStatValueClass(slot.name, 'attack')">{{ getStatValue(slot.name, 'attack') }}</span>
+                </div>
+                <div class="stat-column">
+                  <span class="stat-label">Def</span>
+                  <span class="stat-bar" [style.width.%]="getStatPercentage(slot.name, 'defense')"></span>
+                  <span class="stat-value" [ngClass]="getStatValueClass(slot.name, 'defense')">{{ getStatValue(slot.name, 'defense') }}</span>
+                </div>
+                <div class="stat-column">
+                  <span class="stat-label">SpA</span>
+                  <span class="stat-bar" [style.width.%]="getStatPercentage(slot.name, 'specialAttack')"></span>
+                  <span class="stat-value" [ngClass]="getStatValueClass(slot.name, 'specialAttack')">{{ getStatValue(slot.name, 'specialAttack') }}</span>
+                </div>
+                <div class="stat-column">
+                  <span class="stat-label">SpD</span>
+                  <span class="stat-bar" [style.width.%]="getStatPercentage(slot.name, 'specialDefense')"></span>
+                  <span class="stat-value" [ngClass]="getStatValueClass(slot.name, 'specialDefense')">{{ getStatValue(slot.name, 'specialDefense') }}</span>
+                </div>
+                <div class="stat-column">
+                  <span class="stat-label">Spd</span>
+                  <span class="stat-bar" [style.width.%]="getStatPercentage(slot.name, 'speed')"></span>
+                  <span class="stat-value" [ngClass]="getStatValueClass(slot.name, 'speed')">{{ getStatValue(slot.name, 'speed') }}</span>
+                </div>
+                <div class="total-stats" *ngIf="slot.name">
+                  BST: <span>{{ calculateTotalStats(slot.name) }}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="empty-slot-message" *ngIf="!slot.name">
+              <span class="add-pokemon-icon">+</span>
+              <span>Add Pokémon</span>
+            </div>
           </div>
-
-          <select [(ngModel)]="slot.item">
-            <option value="">Item</option>
-            <option *ngFor="let i of itemList" [value]="i">{{ i }}</option>
-          </select>
-
-          <select [(ngModel)]="slot.ability">
-            <option value="">Ability</option>
-            <option *ngFor="let a of abilityList" [value]="a">{{ a }}</option>
-          </select>
         </div>
       </div>
     </div>
-
+    
     <!-- Analysis Area -->
     <div class="analysis-area">
-      <div class="analysis-card">
-        <h3>Team Defence</h3>
-        <div class="type-grid">
-          <div class="type-box" *ngFor="let t of types">{{ t }}<br />0</div>
+      <div class="analysis-card team-overview">
+        <h3>Team Overview</h3>
+        <div class="team-summary">
+          <div class="team-strength-weakness">
+            <div class="team-strengths">
+              <h4>Team Strengths</h4>
+              <div class="type-tags">
+                <span class="type-tag" *ngFor="let type of teamStrengths" [ngClass]="'type-' + type.toLowerCase()">
+                  {{ type }}
+                </span>
+                <span *ngIf="teamStrengths.length === 0" class="empty-message">No data yet</span>
+              </div>
+            </div>
+            <div class="team-weaknesses">
+              <h4>Team Weaknesses</h4>
+              <div class="type-tags">
+                <span class="type-tag" *ngFor="let type of teamWeaknesses" [ngClass]="'type-' + type.toLowerCase()">
+                  {{ type }}
+                </span>
+                <span *ngIf="teamWeaknesses.length === 0" class="empty-message">No data yet</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="team-stat-summary" *ngIf="hasTeamMembers()">
+            <h4>Team Stats Average</h4>
+            <div class="team-stat-bars">
+              <div class="stat-row">
+                <div class="stat-name">HP</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('hp')" 
+                        [style.background]="getStatBarColor('hp')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().hp | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">Atk</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('attack')" 
+                        [style.background]="getStatBarColor('attack')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().attack | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">Def</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('defense')" 
+                        [style.background]="getStatBarColor('defense')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().defense | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">SpA</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('specialAttack')" 
+                        [style.background]="getStatBarColor('specialAttack')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().specialAttack | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">SpD</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('specialDefense')" 
+                        [style.background]="getStatBarColor('specialDefense')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().specialDefense | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">Spd</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('speed')" 
+                        [style.background]="getStatBarColor('speed')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().speed | number:'1.0-0' }}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
+      
       <div class="analysis-card">
-        <h3>Team Type Coverage</h3>
-        <div class="type-grid">
-          <div class="type-box" *ngFor="let t of types">{{ t }}<br />0</div>
+        <h3>Team Defense</h3>
+        <div class="type-grid defensive-grid">
+          <div class="type-box" *ngFor="let t of types" 
+               [ngClass]="getTypeBoxClass(t, teamDefense[t])" 
+               [title]="getTypeDefenseTooltip(t)">
+            {{ t }}
+            <div class="effectiveness-value">{{ teamDefense[t] || 0 }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="analysis-card suggestions">
+        <h3>Team Suggestions</h3>
+        <div class="suggestion-list">
+          <div class="suggestion-item" *ngFor="let suggestion of teamSuggestions">
+            <span class="suggestion-icon">{{ suggestion.icon }}</span>
+            <span class="suggestion-text">{{ suggestion.text }}</span>
+          </div>
+          <div class="suggestion-item" *ngIf="teamSuggestions.length === 0">
+            <span class="suggestion-icon">💡</span>
+            <span class="suggestion-text">Add Pokémon to your team to see suggestions.</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Filters and Footer -->
-  <div class="filters-section">
-    <div class="filters-tabs">
-      <button class="active">Search Filters</button>
-      <button>Team Checklist</button>
-      <button>Save/Load Team</button>
-    </div>
-    <div class="filters-controls">
-      <select><option>Format</option></select>
-      <select><option>Type</option></select>
-      <select><option>Region</option></select>
-      <select><option>Move</option></select>
+  
+  <!-- Filters and Advanced Options -->
+  <div class="advanced-section">
+    <div class="filters-panel active-panel">
+      <div class="filter-group">
+        <div class="filter-row">
+          <div class="filter-column">
+            <label>Format</label>
+            <select>
+              <option>All Formats</option>
+              <option>VGC 2024</option>
+              <option>Singles OU</option>
+            </select>
+          </div>
+          
+          <div class="filter-column">
+            <label>Type</label>
+            <select>
+              <option>Any Type</option>
+              <option *ngFor="let t of types">{{t}}</option>
+            </select>
+          </div>
+          
+          <div class="filter-column">
+            <label>Generation</label>
+            <select>
+              <option>All Gens</option>
+              <option>Gen 9 (SV)</option>
+              <option>Gen 8 (SWSH)</option>
+              <option>Gen 7 (SM/USUM)</option>
+              <option>Gen 6 (XY/ORAS)</option>
+            </select>
+          </div>
+          
+          <div class="filter-column">
+            <label>Search</label>
+            <input type="text" placeholder="Search Pokémon, moves, abilities..." class="search-input">
+          </div>
+        </div>
+        
+        <div class="filter-toggles">
+          <label class="toggle-container">
+            <input type="checkbox">
+            <span class="toggle-label">Legendary Pokémon</span>
+          </label>
+          
+          <label class="toggle-container">
+            <input type="checkbox">
+            <span class="toggle-label">Show Base Stats</span>
+          </label>
+          
+          <label class="toggle-container">
+            <input type="checkbox">
+            <span class="toggle-label">Meta Analysis</span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
+  
+  <footer class="team-footer">
+    <p class="footer-copyright">© 2025 Pokémon Team Builder. This site is not affiliated with Pokémon, Nintendo, or Game Freak.</p>
+  </footer>
 </div>

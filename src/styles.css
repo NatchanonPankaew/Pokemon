@@ -1,1 +1,262 @@
-/* You can add global styles to this file, and also import other style files */
+/* styles.css - Global Pokemon Type and Species Styling */
+
+/* Primary Pokemon Type Colors - Optimized for text contrast on both light and dark backgrounds */
+:root {
+    /* Type Colors - Base colors with good contrast for white text */
+    --type-normal: #9D9D6B;
+    --type-fire: #E16926;
+    --type-water: #5374D5;
+    --type-grass: #67B144;
+    --type-electric: #E7BB18;
+    --type-ice: #7DCACA;
+    --type-fighting: #B02C22;
+    --type-poison: #8E3A8E;
+    --type-ground: #CFB058;
+    --type-flying: #9D82E5;
+    --type-psychic: #EB4D7C;
+    --type-bug: #9CAB18;
+    --type-rock: #A89232;
+    --type-ghost: #644E87;
+    --type-dark: #634D3F;
+    --type-dragon: #6B33E0;
+    --type-steel: #A7A7BC;
+    --type-fairy: #DE8599;
+    
+    /* Species/Generation Colors */
+    --species-kanto: #FF1111;
+    --species-johto: #DAA520;
+    --species-hoenn: #1E90FF;
+    --species-sinnoh: #9370DB;
+    --species-unova: #3CB371;
+    --species-kalos: #FF69B4;
+    --species-alola: #FF8C00;
+    --species-galar: #800080;
+    --species-paldea: #FF4500;
+  
+    /* Status Effect Colors */
+    --status-poison: #A040A0;
+    --status-paralysis: #F8D030;
+    --status-burn: #F08030;
+    --status-sleep: #C0C0C0;
+    --status-freeze: #98D8D8;
+    --status-confusion: #A890F0;
+  }
+  
+  /* ====== Type Badge Styling ====== */
+  /* Use for smaller type indicators like badges or pills */
+  .type-badge {
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    text-align: center;
+    margin: 2px;
+  }
+  
+  /* ====== Type Box Styling ====== */
+  /* Use for larger type containers like in the type chart */
+  .type-box {
+    padding: 8px 5px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 70px;
+    text-align: center;
+  }
+  
+  /* ====== Type Colors for Badges and Boxes ====== */
+  /* Pokemon Type styling */
+  .type-normal, .type-badge.type-normal, .type-box.type-normal { background-color: var(--type-normal); }
+  .type-fire, .type-badge.type-fire, .type-box.type-fire { background-color: var(--type-fire); }
+  .type-water, .type-badge.type-water, .type-box.type-water { background-color: var(--type-water); }
+  .type-grass, .type-badge.type-grass, .type-box.type-grass { background-color: var(--type-grass); }
+  .type-electric, .type-badge.type-electric, .type-box.type-electric { background-color: var(--type-electric); }
+  .type-ice, .type-badge.type-ice, .type-box.type-ice { background-color: var(--type-ice); }
+  .type-fighting, .type-badge.type-fighting, .type-box.type-fighting { background-color: var(--type-fighting); }
+  .type-poison, .type-badge.type-poison, .type-box.type-poison { background-color: var(--type-poison); }
+  .type-ground, .type-badge.type-ground, .type-box.type-ground { background-color: var(--type-ground); }
+  .type-flying, .type-badge.type-flying, .type-box.type-flying { background-color: var(--type-flying); }
+  .type-psychic, .type-badge.type-psychic, .type-box.type-psychic { background-color: var(--type-psychic); }
+  .type-bug, .type-badge.type-bug, .type-box.type-bug { background-color: var(--type-bug); }
+  .type-rock, .type-badge.type-rock, .type-box.type-rock { background-color: var(--type-rock); }
+  .type-ghost, .type-badge.type-ghost, .type-box.type-ghost { background-color: var(--type-ghost); }
+  .type-dark, .type-badge.type-dark, .type-box.type-dark { background-color: var(--type-dark); }
+  .type-dragon, .type-badge.type-dragon, .type-box.type-dragon { background-color: var(--type-dragon); }
+  .type-steel, .type-badge.type-steel, .type-box.type-steel { background-color: var(--type-steel); }
+  .type-fairy, .type-badge.type-fairy, .type-box.type-fairy { background-color: var(--type-fairy); }
+  
+  /* ====== Species/Generation Badge Styling ====== */
+  .species-badge {
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    text-align: center;
+    margin: 2px;
+  }
+  
+  /* Species/Generation styling */
+  .species-kanto, .species-badge.species-kanto { background-color: var(--species-kanto); }
+  .species-johto, .species-badge.species-johto { background-color: var(--species-johto); }
+  .species-hoenn, .species-badge.species-hoenn { background-color: var(--species-hoenn); }
+  .species-sinnoh, .species-badge.species-sinnoh { background-color: var(--species-sinnoh); }
+  .species-unova, .species-badge.species-unova { background-color: var(--species-unova); }
+  .species-kalos, .species-badge.species-kalos { background-color: var(--species-kalos); }
+  .species-alola, .species-badge.species-alola { background-color: var(--species-alola); }
+  .species-galar, .species-badge.species-galar { background-color: var(--species-galar); }
+  .species-paldea, .species-badge.species-paldea { background-color: var(--species-paldea); }
+  
+  /* ====== Status Effect Styling ====== */
+  .status-badge {
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    text-align: center;
+    margin: 2px;
+  }
+  
+  /* Status effect styling */
+  .status-poison, .status-badge.status-poison { background-color: var(--status-poison); }
+  .status-paralysis, .status-badge.status-paralysis { background-color: var(--status-paralysis); }
+  .status-burn, .status-badge.status-burn { background-color: var(--status-burn); }
+  .status-sleep, .status-badge.status-sleep { background-color: var(--status-sleep); }
+  .status-freeze, .status-badge.status-freeze { background-color: var(--status-freeze); }
+  .status-confusion, .status-badge.status-confusion { background-color: var(--status-confusion); }
+  
+  /* ====== Background Gradient Styling ====== */
+  /* Type gradient backgrounds - for cards or containers */
+  .bg-gradient-normal { background: linear-gradient(135deg, var(--type-normal), #c2c2a1); }
+  .bg-gradient-fire { background: linear-gradient(135deg, var(--type-fire), #ff9d5c); }
+  .bg-gradient-water { background: linear-gradient(135deg, var(--type-water), #98b9ff); }
+  .bg-gradient-grass { background: linear-gradient(135deg, var(--type-grass), #98e66d); }
+  .bg-gradient-electric { background: linear-gradient(135deg, var(--type-electric), #ffea71); }
+  .bg-gradient-ice { background: linear-gradient(135deg, var(--type-ice), #bce6e6); }
+  .bg-gradient-fighting { background: linear-gradient(135deg, var(--type-fighting), #e85950); }
+  .bg-gradient-poison { background: linear-gradient(135deg, var(--type-poison), #c073c0); }
+  .bg-gradient-ground { background: linear-gradient(135deg, var(--type-ground), #edd094); }
+  .bg-gradient-flying { background: linear-gradient(135deg, var(--type-flying), #c9b7f2); }
+  .bg-gradient-psychic { background: linear-gradient(135deg, var(--type-psychic), #ff9db5); }
+  .bg-gradient-bug { background: linear-gradient(135deg, var(--type-bug), #c9d85f); }
+  .bg-gradient-rock { background: linear-gradient(135deg, var(--type-rock), #d1bc6c); }
+  .bg-gradient-ghost { background: linear-gradient(135deg, var(--type-ghost), #9d89ba); }
+  .bg-gradient-dark { background: linear-gradient(135deg, var(--type-dark), #927865); }
+  .bg-gradient-dragon { background: linear-gradient(135deg, var(--type-dragon), #9772f0); }
+  .bg-gradient-steel { background: linear-gradient(135deg, var(--type-steel), #d1d1e0); }
+  .bg-gradient-fairy { background: linear-gradient(135deg, var(--type-fairy), #f6bdc6); }
+  
+  /* ====== Text Color Styling ====== */
+  /* For when you want text to be colored by type */
+  .text-normal { color: var(--type-normal); }
+  .text-fire { color: var(--type-fire); }
+  .text-water { color: var(--type-water); }
+  .text-grass { color: var(--type-grass); }
+  .text-electric { color: var(--type-electric); }
+  .text-ice { color: var(--type-ice); }
+  .text-fighting { color: var(--type-fighting); }
+  .text-poison { color: var(--type-poison); }
+  .text-ground { color: var(--type-ground); }
+  .text-flying { color: var(--type-flying); }
+  .text-psychic { color: var(--type-psychic); }
+  .text-bug { color: var(--type-bug); }
+  .text-rock { color: var(--type-rock); }
+  .text-ghost { color: var(--type-ghost); }
+  .text-dark { color: var(--type-dark); }
+  .text-dragon { color: var(--type-dragon); }
+  .text-steel { color: var(--type-steel); }
+  .text-fairy { color: var(--type-fairy); }
+  
+  /* ====== Border Color Styling ====== */
+  /* For when you want borders to be colored by type */
+  .border-normal { border-color: var(--type-normal); }
+  .border-fire { border-color: var(--type-fire); }
+  .border-water { border-color: var(--type-water); }
+  .border-grass { border-color: var(--type-grass); }
+  .border-electric { border-color: var(--type-electric); }
+  .border-ice { border-color: var(--type-ice); }
+  .border-fighting { border-color: var(--type-fighting); }
+  .border-poison { border-color: var(--type-poison); }
+  .border-ground { border-color: var(--type-ground); }
+  .border-flying { border-color: var(--type-flying); }
+  .border-psychic { border-color: var(--type-psychic); }
+  .border-bug { border-color: var(--type-bug); }
+  .border-rock { border-color: var(--type-rock); }
+  .border-ghost { border-color: var(--type-ghost); }
+  .border-dark { border-color: var(--type-dark); }
+  .border-dragon { border-color: var(--type-dragon); }
+  .border-steel { border-color: var(--type-steel); }
+  .border-fairy { border-color: var(--type-fairy); }
+  
+  /* ====== Type Icon Styling (if using font icons) ====== */
+  .type-icon {
+    font-size: 1.2rem;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  
+  /* ====== Utility classes for common type compositions ====== */
+  .type-dual-badge {
+    position: relative;
+    padding-right: 20px;
+  }
+  
+  .type-dual-badge::after {
+    content: "";
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: currentColor;
+    opacity: 0.7;
+  }
+  
+  /* ====== Animation for type highlighting ====== */
+  @keyframes typePulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(var(--type-color-rgb), 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(var(--type-color-rgb), 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(var(--type-color-rgb), 0);
+    }
+  }
+  
+  .type-pulse {
+    animation: typePulse 2s infinite;
+  }
+  
+  /* ====== Responsive adjustments ====== */
+  @media (max-width: 768px) {
+    .type-badge, .species-badge, .status-badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+    }
+    
+    .type-box {
+      font-size: 0.8rem;
+      min-width: 60px;
+    }
+  }
