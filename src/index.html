@@ -9,5 +9,108 @@
 </head>
 <body>
   <app-root></app-root>
+
+  <script>
+    // 1. การทำให้หน้าเว็บเคลื่อนไหวเมื่อโหลด
+    window.onload = function() {
+      document.body.style.transition = "opacity 1s";
+      document.body.style.opacity = 0;
+      setTimeout(function() {
+        document.body.style.opacity = 1;
+      }, 100);
+    };
+  
+    // 2. การทำให้มีการปรากฏข้อความเมื่อผู้ใช้เลื่อนหน้าจอ
+    document.addEventListener("scroll", function() {
+      const scrollY = window.scrollY;
+      const scrollMessage = document.getElementById("scrollMessage");
+      if (!scrollMessage && scrollY > 100) {
+        const message = document.createElement("div");
+        message.id = "scrollMessage";
+        message.textContent = "Catch 'em all!";
+        message.style.position = "fixed";
+        message.style.top = "10px";
+        message.style.left = "50%";
+        message.style.transform = "translateX(-50%)";
+        message.style.padding = "10px";
+        message.style.backgroundColor = "#ffcc00"; // Pokémon Yellow
+        message.style.color = "#fff";
+        message.style.fontFamily = "'Pokemon', sans-serif";
+        message.style.fontWeight = "bold";
+        message.style.borderRadius = "5px";
+        message.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.3)";
+        message.style.transition = "opacity 0.5s ease";
+        document.body.appendChild(message);
+      } else if (scrollY <= 100) {
+        const message = document.getElementById("scrollMessage");
+        if (message) {
+          message.style.opacity = 0;
+          setTimeout(() => message.remove(), 500);
+        }
+      }
+    });
+  
+    // 3. การเพิ่มเอฟเฟกต์ให้ปุ่มเมื่อมีการคลิก
+    document.querySelectorAll("button").forEach(button => {
+      button.addEventListener("click", function() {
+        this.style.transform = "scale(1.1)";
+        this.style.transition = "transform 0.2s ease";
+        setTimeout(() => {
+          this.style.transform = "scale(1)";
+        }, 200);
+      });
+    });
+  
+    // 4. การทำให้ปุ่มหรือออบเจกต์ที่มีการ Hover มีเอฟเฟกต์
+    document.querySelectorAll("button, a").forEach(element => {
+      element.addEventListener("mouseover", function() {
+        this.style.transition = "all 0.3s ease";
+        this.style.transform = "scale(1.1)";
+        this.style.boxShadow = "0 4px 15px rgba(255, 165, 0, 0.4)"; // Pokémon glow effect
+      });
+  
+      element.addEventListener("mouseout", function() {
+        this.style.transform = "scale(1)";
+        this.style.boxShadow = "none";
+      });
+    });
+  
+    // 5. การแสดงผล tooltip เมื่อวางเมาส์
+    document.querySelectorAll("[data-tooltip]").forEach(element => {
+      element.addEventListener("mouseover", function(e) {
+        const tooltipText = this.getAttribute("data-tooltip");
+        const tooltip = document.createElement("div");
+        tooltip.textContent = tooltipText;
+        tooltip.style.position = "absolute";
+        tooltip.style.top = `${e.clientY + 10}px`;
+        tooltip.style.left = `${e.clientX + 10}px`;
+        tooltip.style.padding = "5px 10px";
+        tooltip.style.backgroundColor = "#333";
+        tooltip.style.color = "#fff";
+        tooltip.style.fontFamily = "'Pokemon', sans-serif";
+        tooltip.style.borderRadius = "5px";
+        tooltip.style.zIndex = "1000";
+        tooltip.style.transition = "opacity 0.3s ease";
+        tooltip.style.opacity = 0;
+        document.body.appendChild(tooltip);
+    
+        // เพิ่มการทำให้ Tooltip ค่อยๆ ปรากฏ
+        setTimeout(() => {
+          tooltip.style.opacity = 1;
+        }, 50);
+    
+        element.addEventListener("mousemove", function(e) {
+          tooltip.style.top = `${e.clientY + 10}px`;
+          tooltip.style.left = `${e.clientX + 10}px`;
+        });
+    
+        element.addEventListener("mouseout", function() {
+          tooltip.style.opacity = 0;
+          setTimeout(() => tooltip.remove(), 300);
+        });
+      });
+    });
+    
+  </script>
 </body>
 </html>
