@@ -1,0 +1,102 @@
+/* Container for the item grid */
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+  }
+  
+  /* Individual item box */
+  .box {
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px;
+    text-align: center;
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effect */
+  }
+  
+  /* Hover effect for item box */
+  .box:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  }
+  
+  /* Item image */
+  .box img {
+    width: 100px; /* Fixed width */
+    height: 100px; /* Fixed height */
+    margin-bottom: 10px; /* Space below image */
+  }
+  
+  /* Item name */
+  .box h3 {
+    margin: 10px 0;
+    font-size: 1.2em; /* Slightly larger font */
+    color: #333; /* Dark text color */
+    text-transform: capitalize; /* Capitalize the first letter */
+  }
+  
+  /* Item details (category, cost, etc.) */
+  .box p {
+    margin: 5px 0;
+    font-size: 0.9em; /* Smaller font for details */
+    color: #666; /* Medium gray text color */
+  }
+  
+  /* Attributes list */
+  .box p span {
+    display: inline-block;
+    margin-right: 5px; /* Space between attributes */
+    padding: 3px 6px;
+    background-color: #f0f0f0; /* Light gray background */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 0.8em; /* Smaller font for attributes */
+    color: #555; /* Darker gray text color */
+  }
+  
+  /* Pagination controls */
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Space above pagination */
+  }
+  
+  /* Pagination buttons */
+  .pagination-controls .ngx-pagination {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 5px; /* Space between buttons */
+  }
+  
+  .pagination-controls .ngx-pagination li {
+    display: inline-block;
+  }
+  
+  .pagination-controls .ngx-pagination a {
+    padding: 8px 12px;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none;
+    color: #333; /* Dark text color */
+    background-color: #fff; /* White background */
+    transition: background-color 0.2s ease, color 0.2s ease; /* Smooth hover effect */
+  }
+  
+  .pagination-controls .ngx-pagination a:hover {
+    background-color: #007bff; /* Blue background on hover */
+    color: #fff; /* White text on hover */
+    border-color: #007bff; /* Blue border on hover */
+  }
+  
+  /* Active page button */
+  .pagination-controls .ngx-pagination .current {
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    border: 1px solid #007bff; /* Blue border */
+  }
