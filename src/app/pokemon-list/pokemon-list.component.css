@@ -1,19 +1,19 @@
-/* Pokemon Grid - Exciting Theme */
+/* Pokemon Grid - ธีมที่น่าตื่นเต้น */
 .pokemon-grid {
     display: grid;
-    grid-gap: 25px; 
-    padding: 30px; 
+    grid-gap: 25px; /* เพิ่มระยะห่างระหว่างกล่อง */
+    padding: 30px; /* เพิ่ม padding รอบๆ grid */
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    background: linear-gradient(135deg, #306cb0 0%, #0a1c33 100%); 
-    border-radius: 20px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+    background: linear-gradient(135deg, #306cb0 0%, #0a1c33 100%); /* พื้นหลังไล่สีแบบ Pokemon */
+    border-radius: 20px; /* มุมกลมมากขึ้น */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* เงาให้ดูมีมิติ */
     position: relative;
     overflow: hidden;
     z-index: 1;
-}
-
-/* Add decorative background elements */
-.pokemon-grid::before {
+  }
+  
+  /* เพิ่มองค์ประกอบตกแต่งพื้นหลัง */
+  .pokemon-grid::before {
     content: "";
     position: absolute;
     top: 0;
@@ -25,12 +25,12 @@
     background-size: 100px 100px;
     opacity: 0.4;
     z-index: -1;
-}
-
-/* Each box */
-.pokemon-grid .box {
+  }
+  
+  /* กล่องแต่ละกล่อง */
+  .pokemon-grid .box {
     height: auto;
-    padding: 35px; /* Adjust padding to fit */
+    padding: 35px; /* ปรับ padding ให้พอดี */
     border: none;
     border-radius: 18px;
     background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
@@ -42,10 +42,10 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.1);
     transform-style: preserve-3d;
     backface-visibility: hidden;
-}
-
-/* Add hidden background pattern */
-.pokemon-grid .box::before {
+  }
+  
+  /* เพิ่ม background pattern ที่ซ่อนอยู่ */
+  .pokemon-grid .box::before {
     content: "";
     position: absolute;
     top: 0;
@@ -57,20 +57,20 @@
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 0;
-}
-
-/* Add spacing between boxes on hover */
-.pokemon-grid .box:hover {
+  }
+  
+  /* เพิ่มระยะห่างระหว่างกล่องเมื่อ hover */
+  .pokemon-grid .box:hover {
     transform: translateY(-15px) rotateX(5deg);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-}
-
-.pokemon-grid .box:hover::before {
+  }
+  
+  .pokemon-grid .box:hover::before {
     opacity: 1;
-}
-
-/* Add glow effect on hover */
-.pokemon-grid .box::after {
+  }
+  
+  /* เพิ่ม glow effect เมื่อ hover */
+  .pokemon-grid .box::after {
     content: "";
     position: absolute;
     top: -20px;
@@ -81,14 +81,14 @@
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: -1;
-}
-
-.pokemon-grid .box:hover::after {
+  }
+  
+  .pokemon-grid .box:hover::after {
     opacity: 1;
-}
-
-/* Image management */
-.pokemon-grid .box img {
+  }
+  
+  /* การจัดการรูปภาพ */
+  .pokemon-grid .box img {
     max-width: 120px;
     height: auto;
     margin-bottom: 15px;
@@ -102,21 +102,21 @@
     filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
     z-index: 2;
     position: relative;
-}
-
-.pokemon-grid .box:hover img {
+  }
+  
+  .pokemon-grid .box:hover img {
     transform: scale(1.2) rotate(5deg);
     animation: floating 3s infinite ease-in-out;
-}
-
-@keyframes floating {
+  }
+  
+  @keyframes floating {
     0% { transform: scale(1.2) translateY(0) rotate(0deg); }
     50% { transform: scale(1.2) translateY(-10px) rotate(5deg); }
     100% { transform: scale(1.2) translateY(0) rotate(0deg); }
-}
-
-/* Box header */
-.pokemon-grid .box h3 {
+  }
+  
+  /* หัวข้อในกล่อง */
+  .pokemon-grid .box h3 {
     margin: 15px 0 10px 0;
     font-size: 1.5rem;
     font-weight: 800;
@@ -127,16 +127,16 @@
     z-index: 2;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-}
-
-.pokemon-grid .box:hover h3 {
+  }
+  
+  .pokemon-grid .box:hover h3 {
     color: #ff5722;
     transform: scale(1.05);
     letter-spacing: 1.5px;
-}
-
-/* Box details */
-.pokemon-grid .box p {
+  }
+  
+  /* รายละเอียดในกล่อง */
+  .pokemon-grid .box p {
     margin: 8px 0;
     font-size: 0.95rem;
     color: #34495e;
@@ -144,20 +144,20 @@
     transition: all 0.3s ease;
     position: relative;
     z-index: 2;
-}
-
-.pokemon-grid .box:hover p {
+  }
+  
+  .pokemon-grid .box:hover p {
     color: #2c3e50;
     transform: translateX(3px);
-}
-
-.pokemon-grid .box p b {
+  }
+  
+  .pokemon-grid .box p b {
     color: #ff5722;
     font-weight: 700;
-}
-
-/* Type Badge - Add appeal to Pokemon type */
-.pokemon-grid .box p:nth-child(2) {
+  }
+  
+  /* Type Badge - เพิ่มความน่าสนใจให้กับประเภท Pokemon */
+  .pokemon-grid .box p:nth-child(2) {
     position: relative;
     display: inline-block;
     padding: 5px 12px;
@@ -166,25 +166,25 @@
     margin: 12px auto !important;
     transform: translateX(0);
     transition: all 0.3s ease;
-}
-
-.pokemon-grid .box:hover p:nth-child(2) {
+  }
+  
+  .pokemon-grid .box:hover p:nth-child(2) {
     background-color: rgba(255, 204, 0, 0.7);
     box-shadow: 0 5px 10px rgba(255, 204, 0, 0.3);
     transform: translateX(0) scale(1.1);
-}
-
-/* Basic Angular ngx-pagination CSS override */
+  }
+  
+/* พื้นฐาน Angular ngx-pagination CSS override */
 :host ::ng-deep pagination-controls {
     margin: 50px auto 30px !important;
     display: flex !important;
     justify-content: center !important;
     position: relative !important;
     width: 100% !important;
-}
-
-/* Display collection name above pagination */
-:host ::ng-deep pagination-controls::before {
+  }
+  
+  /* แสดงชื่อคอลเลกชันเหนือ pagination */
+  :host ::ng-deep pagination-controls::before {
     position: absolute;
     top: -45px;
     left: 0;
@@ -197,16 +197,16 @@
     letter-spacing: 2px;
     transform: scale(1);
     animation: subtlePulse 3s infinite;
-}
-
-@keyframes subtlePulse {
+  }
+  
+  @keyframes subtlePulse {
     0% { opacity: 0.8; }
     50% { opacity: 1; }
     100% { opacity: 0.8; }
-}
-
-/* Use !important to ensure selector is strong enough to override existing CSS */
-:host ::ng-deep .ngx-pagination {
+  }
+  
+  /* ใช้ !important เพื่อให้แน่ใจว่า selector จะแรงพอที่จะ override CSS เดิม */
+  :host ::ng-deep .ngx-pagination {
     margin: 0 auto !important;
     padding: 5px 10px !important;
     border-radius: 30px !important;
@@ -218,25 +218,25 @@
     background: rgba(255, 255, 255, 0.1) !important;
     border: 1px solid rgba(255, 204, 0, 0.2) !important;
     backdrop-filter: blur(5px) !important;
-}
-
-/* Manage all list items in pagination */
-:host ::ng-deep .ngx-pagination li {
+  }
+  
+  /* จัดการ list item ทั้งหมดใน pagination */
+  :host ::ng-deep .ngx-pagination li {
     display: inline-block !important;
     margin: 0 2px !important;
     list-style: none !important;
     transform: scale(1) !important;
     transition: all 0.2s ease !important;
-}
-
-:host ::ng-deep .ngx-pagination li:hover {
+  }
+  
+  :host ::ng-deep .ngx-pagination li:hover {
     transform: scale(1.1) !important;
     z-index: 10 !important;
-}
-
-/* Manage all links and buttons in pagination */
-:host ::ng-deep .ngx-pagination li a,
-:host ::ng-deep .ngx-pagination li button {
+  }
+  
+  /* จัดการ links และ buttons ทั้งหมดใน pagination */
+  :host ::ng-deep .ngx-pagination li a,
+  :host ::ng-deep .ngx-pagination li button {
     color: #3b5ca8 !important;
     border: 1px solid rgba(255, 204, 0, 0.4) !important;
     border-radius: 50% !important;
@@ -255,10 +255,10 @@
     margin: 0 !important;
     padding: 0 !important;
     background: rgba(255, 255, 255, 0.9) !important;
-}
-
-:host ::ng-deep .ngx-pagination li a::after,
-:host ::ng-deep .ngx-pagination li button::after {
+  }
+  
+  :host ::ng-deep .ngx-pagination li a::after,
+  :host ::ng-deep .ngx-pagination li button::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -270,25 +270,25 @@
     background: rgba(255, 204, 0, 0.2);
     z-index: -1;
     transition: all 0.3s ease;
-}
-
-/* Style for hover state */
-:host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover a,
-:host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover button {
+  }
+  
+  /* สไตล์สำหรับ hover state */
+  :host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover a,
+  :host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover button {
     color: #1a3a8f !important;
     border-color: #ffcc00 !important;
     transform: translateY(-2px) !important;
     box-shadow: 0 4px 8px rgba(255, 160, 0, 0.25) !important;
-}
-
-:host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover a::after,
-:host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover button::after {
+  }
+  
+  :host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover a::after,
+  :host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover button::after {
     width: 36px;
     height: 36px;
-}
-
-/* Highlight current page style in pagination */
-:host ::ng-deep .ngx-pagination .current {
+  }
+  
+  /* กำหนดสไตล์ pagination current page ให้โดดเด่น */
+  :host ::ng-deep .ngx-pagination .current {
     color: #ffffff !important;
     background: linear-gradient(135deg, #3b5ca8, #ff5722) !important;
     border: none !important;
@@ -306,67 +306,67 @@
     padding: 0 !important;
     z-index: 2 !important;
     animation: subtleGlow 2s infinite !important;
-}
-
-@keyframes subtleGlow {
+  }
+  
+  @keyframes subtleGlow {
     0% { box-shadow: 0 2px 8px rgba(59, 92, 168, 0.4); }
     50% { box-shadow: 0 4px 12px rgba(255, 87, 34, 0.5); }
     100% { box-shadow: 0 2px 8px rgba(59, 92, 168, 0.4); }
-}
-
-/* For control buttons (Previous, Next) */
-:host ::ng-deep .ngx-pagination .pagination-previous a,
-:host ::ng-deep .ngx-pagination .pagination-next a,
-:host ::ng-deep .ngx-pagination .pagination-previous.disabled,
-:host ::ng-deep .ngx-pagination .pagination-next.disabled {
+  }
+  
+  /* สำหรับปุ่มควบคุม (Previous, Next) */
+  :host ::ng-deep .ngx-pagination .pagination-previous a,
+  :host ::ng-deep .ngx-pagination .pagination-next a,
+  :host ::ng-deep .ngx-pagination .pagination-previous.disabled,
+  :host ::ng-deep .ngx-pagination .pagination-next.disabled {
     font-size: 0 !important;
     position: relative !important;
     background: rgba(255, 255, 255, 0.9) !important;
-}
-
-/* Add arrow icons for previous/next instead of text */
-:host ::ng-deep .ngx-pagination .pagination-previous a::before,
-:host ::ng-deep .ngx-pagination .pagination-previous.disabled::before {
+  }
+  
+  /* เพิ่ม arrow icons สำหรับ previous/next แทนตัวอักษร */
+  :host ::ng-deep .ngx-pagination .pagination-previous a::before,
+  :host ::ng-deep .ngx-pagination .pagination-previous.disabled::before {
     content: "←" !important;
     font-size: 14px !important;
-}
-
-:host ::ng-deep .ngx-pagination .pagination-next a::before,
-:host ::ng-deep .ngx-pagination .pagination-next.disabled::before {
+  }
+  
+  :host ::ng-deep .ngx-pagination .pagination-next a::before,
+  :host ::ng-deep .ngx-pagination .pagination-next.disabled::before {
     content: "→" !important;
     font-size: 14px !important;
-}
-
-/* For disabled state */
-:host ::ng-deep .ngx-pagination .disabled {
+  }
+  
+  /* สำหรับสถานะ disabled */
+  :host ::ng-deep .ngx-pagination .disabled {
     opacity: 0.4 !important;
     cursor: not-allowed !important;
-}
-
-/* Hide all default text or symbols */
-:host ::ng-deep .ngx-pagination .pagination-previous a::after,
-:host ::ng-deep .ngx-pagination .pagination-next a::after,
-:host ::ng-deep .ngx-pagination .pagination-previous.disabled::after,
-:host ::ng-deep .ngx-pagination .pagination-next.disabled::after,
-:host ::ng-deep .ngx-pagination .pagination-previous span::after,
-:host ::ng-deep .ngx-pagination .pagination-next span::after {
+  }
+  
+  /* ซ่อนตัวอักษรหรือเครื่องหมายเดิมทั้งหมด */
+  :host ::ng-deep .ngx-pagination .pagination-previous a::after,
+  :host ::ng-deep .ngx-pagination .pagination-next a::after,
+  :host ::ng-deep .ngx-pagination .pagination-previous.disabled::after,
+  :host ::ng-deep .ngx-pagination .pagination-next.disabled::after,
+  :host ::ng-deep .ngx-pagination .pagination-previous span::after,
+  :host ::ng-deep .ngx-pagination .pagination-next span::after {
     display: none !important;
-}
-
-/* Fix ellipsis display issue */
-:host ::ng-deep .ngx-pagination .small-screen {
+  }
+  
+  /* แก้ไขปัญหาการแสดงผล ellipsis */
+  :host ::ng-deep .ngx-pagination .small-screen {
     display: none !important;
-}
-
-:host ::ng-deep .ngx-pagination .pagination-previous.disabled,
-:host ::ng-deep .ngx-pagination .pagination-next.disabled {
+  }
+  
+  :host ::ng-deep .ngx-pagination .pagination-previous.disabled,
+  :host ::ng-deep .ngx-pagination .pagination-next.disabled {
     background: rgba(240, 240, 240, 0.8) !important;
     border-color: rgba(200, 200, 200, 0.4) !important;
     color: #999999 !important;
-}
-
-/* Manage Ellipsis (...) */
-:host ::ng-deep .ngx-pagination .ellipsis {
+  }
+  
+  /* จัดการ Ellipsis (...) */
+  :host ::ng-deep .ngx-pagination .ellipsis {
     position: relative !important;
     display: flex !important;
     align-items: center !important;
@@ -377,10 +377,10 @@
     font-size: 14px !important;
     font-weight: 500 !important;
     color: #3b5ca8 !important;
-}
-
-/* Beautify container */
-:host ::ng-deep pagination-controls::after {
+  }
+  
+  /* จัดการ container ให้สวยงาม */
+  :host ::ng-deep pagination-controls::after {
     content: "";
     position: absolute;
     bottom: -10px;
@@ -389,27 +389,27 @@
     width: 80px;
     height: 3px;
     border-radius: 3px;
-}
-
-@keyframes pulseGlow {
+  }
+  
+  @keyframes pulseGlow {
     0% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7); }
     70% { box-shadow: 0 0 0 15px rgba(255, 87, 34, 0); }
     100% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
-}
-
-/* Add animation on page load */
-@keyframes fadeInUp {
+  }
+  
+  /* เพิ่ม Animation เมื่อโหลดหน้า */
+  @keyframes fadeInUp {
     from {
-        opacity: 0;
-        transform: translateY(30px);
+      opacity: 0;
+      transform: translateY(30px);
     }
     to {
-        opacity: 1;
-        transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
     }
-}
-
-.pokemon-grid .box {
+  }
+  
+  .pokemon-grid .box {
     animation: fadeInUp 0.6s ease-out forwards;
     opacity: 0;
 }

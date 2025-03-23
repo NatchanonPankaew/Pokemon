@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // 🔹 ใช้กับ ngModel
-import { NgxPaginationModule } from 'ngx-pagination';
+import { CommonModule } from '@angular/common'; // For common directives like *ngIf, *ngFor
+import { HttpClientModule } from '@angular/common/http'; // For HTTP calls
+import { NgxPaginationModule } from 'ngx-pagination'; // Import NgxPaginationModule
 import { DataService } from '../services/data.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
-  standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule, NgxPaginationModule],
+  standalone: true, // Mark as standalone
+  imports: [CommonModule, HttpClientModule, NgxPaginationModule,RouterLink], // Add NgxPaginationModule
   templateUrl: './pokemon-list.component.html',
-  styleUrls: ['./pokemon-list.component.css']
+  styleUrl: './pokemon-list.component.css'
 })
-export class PokermonListComponent implements OnInit {
-  pokemon: any[] = [];              // ข้อมูลโปเกมอนทั้งหมด
-  filteredPokemon: any[] = [];     // ข้อมูลที่กรองจากการค้นหา
-  searchTerm: string = '';         // คำค้นหา
+export class PokemonListComponent implements OnInit {
+  pokemon: any[] = []; // Define the pokemon property
   page = 1;
-  totalPokemons: number = 0;
-  limit = 10;
+  totalPokemons: number = 0; // Initialize with a default value
+  limit = 10; // Number of items per page
 
   constructor(private dataService: DataService) {}
 
@@ -27,34 +25,18 @@ export class PokermonListComponent implements OnInit {
   }
 
   getPokemons() {
-    const offset = (this.page - 1) * this.limit;
-    this.pokemon = [];
-    this.filteredPokemon = [];
+    const limit = 10;
+    const offset = (this.page - 1) * limit;
 
-    this.dataService.getPokemons(1500, 0).subscribe((response: any) => {
+    this.dataService.getPokemons(limit, offset).subscribe((response: any) => {
+      this.totalPokemons = response.count;
+
       response.results.forEach((result: any) => {
         this.dataService.getMoreData(result.name).subscribe((uniqueResponse: any) => {
           this.pokemon.push(uniqueResponse);
-          this.filteredPokemon = [...this.pokemon];
+          console.log(this.pokemon);
         });
       });
     });
   }
-
-  refreshPokemon() {
-    this.searchTerm = '';       // เคลียร์ช่องค้นหา
-    this.page = 1;              // กลับไปหน้าแรก
-    this.getPokemons();        // โหลดข้อมูลใหม่
-  }
-
-  searchPokemon() {
-    const term = this.searchTerm.toLowerCase().trim();
-
-    this.filteredPokemon = this.pokemon.filter(p =>
-      p.name.toLowerCase().startsWith(term)
-    );
-
-    this.page = 1; // รีเซ็ตหน้า
-  }
-
 }

@@ -1,48 +1,51 @@
 <!-- 🔍 Search & 🔄 Refresh -->
-<div class="pokemon-search-container">
+<div style="margin: 1rem 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
   <input
     type="text"
     [(ngModel)]="searchTerm"
     placeholder="Search Pokémon..."
-    class="pokemon-search-input"
-    (keyup.enter)="searchPokemon()"
+    style="padding: 8px; max-width: 300px; width: 100%;"
   />
-  <button (click)="searchPokemon()" class="pokemon-button search-button">
-    <span>🔍</span> Search
+
+  <button (click)="searchPokemon()" style="padding: 8px 12px; background-color: #00b894; color: white;">
+    🔍 Search
   </button>
-  <button (click)="refreshPokemon()" class="pokemon-button refresh-button">
-    <span>🔄</span> Refresh
+
+  <button (click)="refreshPokemon()" style="padding: 8px 12px; background-color: #3b4cca; color: white;">
+    🔄 Refresh
   </button>
 </div>
 
 <!-- Pokemon Grid -->
 <div class="pokemon-grid">
-    <div
-      class="box"
-      *ngFor="let pokemon of filteredPokemon | paginate: { itemsPerPage: limit, currentPage: page }"
-
-    >
+  <div
+    class="box"
+    *ngFor="let pokemon of pokemon | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalPokemons }"
+  >
+    <!-- Navigate to Pokemon details page when clicked -->
       <img [src]="pokemon.sprites.front_default" alt="Pokemon">
       <h3>{{ pokemon.name }}</h3>
-      <p>
-        <b>Type:</b> {{ pokemon.types[0].type.name }}
-      </p>
-      <p>
-        <b>Height:</b> {{ pokemon.height }}
-      </p>
-      <p>
-        <b>Health:</b> {{ pokemon.stats[0].base_stat }}
-      </p>
-      <p>
-        <b>Attack Power:</b> {{ pokemon.stats[1].base_stat }}
-      </p>
-      <p>
-        <b>Defense Power:</b> {{ pokemon.stats[2].base_stat }}
-      </p>
-      <p>
-        <b>Speed:</b> {{ pokemon.stats[5].base_stat }}
-      </p>
-    </div>
+    <p>
+      <b>Type:</b> {{ pokemon.types[0].type.name }}
+    </p>
+    <p>
+      <b>Height:</b> {{ pokemon.height }}
+    </p>
+    <p>
+      <b>Health:</b> {{ pokemon.stats[0].base_stat }}
+    </p>
+    <p>
+      <b>Attack Power:</b> {{ pokemon.stats[1].base_stat }}
+    </p>
+    <p>
+      <b>Defense Power:</b> {{ pokemon.stats[2].base_stat }}
+    </p>
+    <p>
+      <b>Speed:</b> {{ pokemon.stats[5].base_stat }}
+    </p>
+    <p><a [routerLink]="['/pokemon-details', pokemon.id]" class="view-details">View Details</a></p>
   </div>
+</div>
 
- <pagination-controls (pageChange)="page = $event; pokemon = []; getPokemons()" ></pagination-controls>
+<!-- Pagination Controls -->
+<pagination-controls (pageChange)="page = $event; pokemon = []; getPokemons()"></pagination-controls>

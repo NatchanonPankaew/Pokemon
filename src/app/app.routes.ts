@@ -1,20 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { PokermonListComponent } from './pokemon-list/pokemon-list.component';
+import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { ItemsListComponent } from './items-list/items-list.component';
-import { TeamComponent } from './team/team.component';
-
+import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'pokemon-list', component: PokermonListComponent },  // แก้ไขการสะกดให้ถูกต้อง
-  { path: 'item-list', component: ItemsListComponent},
-  { path: 'team', component: TeamComponent},
-  { path: '**', redirectTo: '' }
+  { path: 'pokemon-list', component: PokemonListComponent },
+  { path: 'item-list', component: ItemsListComponent },
+  { path: 'pokemon-details/:id', component: PokemonDetailsComponent},
+  { path: '**', redirectTo: '' }  // wildcard for unknown paths
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
