@@ -1,0 +1,68 @@
+<!-- team.component.html -->
+<div class="team-container">
+  <h1>My Pokemon Team</h1>
+  <p class="sub">For Generation 6 to 9 (Scarlet/Violet)</p>
+
+  <div class="main-grid">
+    <!-- Team Input Area -->
+    <div class="team-input">
+      <div class="team-grid">
+        <div class="team-slot" *ngFor="let slot of team">
+          <select [(ngModel)]="slot.name">
+            <option value="">Name</option>
+            <option *ngFor="let p of pokemonList" [value]="p">{{ p }}</option>
+          </select>
+
+          <div *ngFor="let move of slot.moves; let i = index">
+            <select [(ngModel)]="slot.moves[i]">
+              <option value="">Move</option>
+              <option *ngFor="let m of moveList" [value]="m">{{ m }}</option>
+            </select>
+          </div>
+
+          <select [(ngModel)]="slot.item">
+            <option value="">Item</option>
+            <option *ngFor="let i of itemList" [value]="i">{{ i }}</option>
+          </select>
+
+          <select [(ngModel)]="slot.ability">
+            <option value="">Ability</option>
+            <option *ngFor="let a of abilityList" [value]="a">{{ a }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analysis Area -->
+    <div class="analysis-area">
+      <div class="analysis-card">
+        <h3>Team Defence</h3>
+        <div class="type-grid">
+          <div class="type-box" *ngFor="let t of types">{{ t }}<br />0</div>
+        </div>
+      </div>
+
+      <div class="analysis-card">
+        <h3>Team Type Coverage</h3>
+        <div class="type-grid">
+          <div class="type-box" *ngFor="let t of types">{{ t }}<br />0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters and Footer -->
+  <div class="filters-section">
+    <div class="filters-tabs">
+      <button class="active">Search Filters</button>
+      <button>Team Checklist</button>
+      <button>Save/Load Team</button>
+    </div>
+    <div class="filters-controls">
+      <select><option>Format</option></select>
+      <select><option>Type</option></select>
+      <select><option>Region</option></select>
+      <select><option>Move</option></select>
+    </div>
+  </div>
+</div>
