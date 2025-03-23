@@ -1,0 +1,79 @@
+/* Pokemon Grid */
+.pokemon-grid {
+    display: grid;
+    grid-gap: 30px; /* Increased gap between grid items */
+    padding: 30px; /* Increased padding around the grid */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Slightly larger min width */
+}
+
+.pokemon-grid .box {
+    width: 100%;
+    height: auto;
+    padding: 25px; /* Increased padding inside each box */
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pokemon-grid .box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-grid .box img {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 20px; /* Increased margin below the image */
+}
+
+.pokemon-grid .box h3 {
+    margin: 15px 0; /* Increased margin around the heading */
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.pokemon-grid .box p {
+    margin: 8px 0; /* Increased margin around paragraphs */
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+    text-align: center;
+    margin-top: 40px; /* Increased margin above pagination controls */
+}
+
+.pagination-controls .ngx-pagination {
+    padding-left: 0;
+}
+
+.pagination-controls .ngx-pagination li {
+    display: inline-block;
+    margin: 0 8px; /* Increased margin between pagination items */
+}
+
+.pagination-controls .ngx-pagination a {
+    text-decoration: none;
+    padding: 10px 15px; /* Increased padding inside pagination links */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination-controls .ngx-pagination a:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination-controls .ngx-pagination .current {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}

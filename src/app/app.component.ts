@@ -1,12 +1,16 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common'; // For common directives
+import { PokermonListComponent } from './pokemon-list/pokemon-list.component';
+import { HeaderComponent } from "./header/header.component"; // Import the component
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [ PokermonListComponent, HeaderComponent], // Import PokermonListComponent
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'pokemon-dex';
+  title = 'My Angular App';
 }
