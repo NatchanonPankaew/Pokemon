@@ -7,7 +7,7 @@ import { TeamComponent } from './team/team.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'pokemon-list', component: PokermonListComponent },  // แก้ไขการสะกดให้ถูกต้อง
+  { path: 'pokemon-list', component: PokermonListComponent }, 
   { path: 'item-list', component: ItemsListComponent},
   { path: 'team', component: TeamComponent},
   { path: '**', redirectTo: '' }
