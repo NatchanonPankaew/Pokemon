@@ -1,102 +1,468 @@
-/* Container for the item grid */
+/* Item Grid - Exciting Theme */
 .item-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
-    gap: 20px; /* Space between items */
-    padding: 20px;
+  display: grid;
+  grid-gap: 25px; 
+  padding: 30px; 
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  background: linear-gradient(135deg, #306cb0 0%, #0a1c33 100%); 
+  border-radius: 20px; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Add decorative background elements */
+.item-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="none"/><circle cx="50" cy="50" r="15" stroke="rgba(255,255,255,0.08)" stroke-width="3" fill="rgba(255,255,255,0.03)"/><line x1="50" y1="10" x2="50" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="2"/><line x1="10" y1="50" x2="90" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>');
+  background-repeat: repeat;
+  background-size: 100px 100px;
+  opacity: 0.4;
+  z-index: -1;
+}
+
+/* Each box */
+.item-grid .box {
+  height: 90%; /* Changed from auto to 100% for consistent height */
+  display: flex; /* Added flex display for better content arrangement */
+  flex-direction: column; /* Stack children vertically */
+  padding: 25px; /* Reduced padding slightly */
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Add hidden background pattern */
+.item-grid .box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" stroke="rgba(0,0,0,0.03)" stroke-width="2" fill="none"/><circle cx="20" cy="20" r="8" stroke="rgba(0,0,0,0.03)" stroke-width="1" fill="none"/></svg>');
+  background-repeat: repeat;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+/* Add spacing between boxes on hover */
+.item-grid .box:hover {
+  transform: translateY(-15px) rotateX(5deg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.item-grid .box:hover::before {
+  opacity: 1;
+}
+
+/* Add glow effect on hover */
+.item-grid .box::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: radial-gradient(circle, rgba(255, 204, 0, 0.4) 0%, rgba(255, 204, 0, 0) 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.item-grid .box:hover::after {
+  opacity: 1;
+}
+
+/* Image management */
+.item-grid .box img {
+  max-width: 100px; /* Reduced from 120px */
+  height: auto;
+  margin: 0 auto 15px; /* Centered with auto margins */
+  border-radius: 50%;
+  border: 5px solid #ffcc00;
+  padding: 30px; /* Reduced from 40px */
+  background: radial-gradient(circle, #fff8e1 0%, #ffffff 100%);
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+  transition: all 0.5s ease;
+  transform: scale(1);
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+  z-index: 2;
+  position: relative;
+}
+
+.item-grid .box:hover img {
+  transform: scale(1.1) rotate(5deg); /* Reduced scale from 1.2 to 1.1 */
+  animation: floating 3s infinite ease-in-out;
+}
+
+@keyframes floating {
+  0% { transform: scale(1.1) translateY(0) rotate(0deg); }
+  50% { transform: scale(1.1) translateY(-10px) rotate(5deg); }
+  100% { transform: scale(1.1) translateY(0) rotate(0deg); }
+}
+
+/* Box header */
+.item-grid .box h3 {
+  margin: 15px 0 10px 0;
+  font-size: 1.4rem; /* Slightly smaller */
+  font-weight: 800;
+  color: #2c3e50;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  word-wrap: break-word; /* Added for better text wrapping */
+  overflow-wrap: break-word; /* Added for better text wrapping */
+  hyphens: auto; /* Added to allow hyphenation */
+}
+
+.item-grid .box:hover h3 {
+  color: #ff5722;
+  transform: scale(1.05);
+  letter-spacing: 1.2px; /* Reduced from 1.5px */
+}
+
+/* Content container for better text management */
+.item-grid .box .content {
+  flex: 1; /* Takes remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden; /* Prevents overflow */
+}
+
+/* Box details */
+.item-grid .box p {
+  margin: 8px 0;
+  font-size: 0.9rem; /* Slightly smaller */
+  color: #34495e;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  line-height: 1.4; /* Better line height for readability */
+  word-wrap: break-word; /* Added for better text wrapping */
+  overflow-wrap: break-word; /* Added for better text wrapping */
+  max-height: none; /* Remove fixed height constraints */
+}
+
+.item-grid .box:hover p {
+  color: #2c3e50;
+  transform: translateX(2px); /* Reduced from 3px */
+}
+
+.item-grid .box p b {
+  color: #ff5722;
+  font-weight: 700;
+}
+
+/* Type Badge - Add appeal to Pokemon type */
+.item-grid .box p:nth-child(2) {
+  position: relative;
+  display: inline-block;
+  padding: 5px 12px;
+  background-color: rgba(255, 204, 0, 0.2);
+  border-radius: 20px;
+  margin: 12px auto !important;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.item-grid .box:hover p:nth-child(2) {
+  background-color: rgba(255, 204, 0, 0.7);
+  box-shadow: 0 5px 10px rgba(255, 204, 0, 0.3);
+  transform: translateX(0) scale(1.1);
+}
+
+/* For longer descriptions - makes text more readable */
+.item-grid .box p.description {
+  text-align: left;
+  max-height: 100px; /* Set a max height */
+  overflow-y: auto; /* Add scrollbar if text exceeds max height */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #ffcc00 #f0f0f0; /* For Firefox */
+  padding-right: 5px; /* Space for scrollbar */
+  font-size: 0.85rem; /* Smaller font for descriptions */
+  line-height: 1.5; /* Better readability */
+}
+
+/* Customize scrollbar for webkit browsers */
+.item-grid .box p.description::-webkit-scrollbar {
+  width: 4px;
+}
+
+.item-grid .box p.description::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.item-grid .box p.description::-webkit-scrollbar-thumb {
+  background-color: #ffcc00;
+  border-radius: 10px;
+}
+
+/* Basic Angular ngx-pagination CSS override */
+:host ::ng-deep pagination-controls {
+  margin: 50px auto 30px !important;
+  display: flex !important;
+  justify-content: center !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+/* Display collection name above pagination */
+:host ::ng-deep pagination-controls::before {
+  position: absolute;
+  top: -45px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffcc00;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+  transform: scale(1);
+  animation: subtlePulse 3s infinite;
+}
+
+@keyframes subtlePulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+/* Use !important to ensure selector is strong enough to override existing CSS */
+:host ::ng-deep .ngx-pagination {
+  margin: 0 auto !important;
+  padding: 5px 10px !important;
+  border-radius: 30px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  position: relative !important;
+  z-index: 5 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 204, 0, 0.2) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+/* Manage all list items in pagination */
+:host ::ng-deep .ngx-pagination li {
+  display: inline-block !important;
+  margin: 0 2px !important;
+  list-style: none !important;
+  transform: scale(1) !important;
+  transition: all 0.2s ease !important;
+}
+
+:host ::ng-deep .ngx-pagination li:hover {
+  transform: scale(1.1) !important;
+  z-index: 10 !important;
+}
+
+/* Manage all links and buttons in pagination */
+:host ::ng-deep .ngx-pagination li a,
+:host ::ng-deep .ngx-pagination li button {
+  color: #3b5ca8 !important;
+  border: 1px solid rgba(255, 204, 0, 0.4) !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  text-decoration: none !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+:host ::ng-deep .ngx-pagination li a::after,
+:host ::ng-deep .ngx-pagination li button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 204, 0, 0.2);
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+/* Style for hover state */
+:host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover a,
+:host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover button {
+  color: #1a3a8f !important;
+  border-color: #ffcc00 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px rgba(255, 160, 0, 0.25) !important;
+}
+
+:host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover a::after,
+:host ::ng-deep .ngx-pagination li:not(.current):not(.disabled):hover button::after {
+  width: 36px;
+  height: 36px;
+}
+
+/* Highlight current page style in pagination */
+:host ::ng-deep .ngx-pagination .current {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #3b5ca8, #ff5722) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  box-shadow: 0 2px 10px rgba(59, 92, 168, 0.4) !important;
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 2 !important;
+  animation: subtleGlow 2s infinite !important;
+}
+
+@keyframes subtleGlow {
+  0% { box-shadow: 0 2px 8px rgba(59, 92, 168, 0.4); }
+  50% { box-shadow: 0 4px 12px rgba(255, 87, 34, 0.5); }
+  100% { box-shadow: 0 2px 8px rgba(59, 92, 168, 0.4); }
+}
+
+/* For control buttons (Previous, Next) */
+:host ::ng-deep .ngx-pagination .pagination-previous a,
+:host ::ng-deep .ngx-pagination .pagination-next a,
+:host ::ng-deep .ngx-pagination .pagination-previous.disabled,
+:host ::ng-deep .ngx-pagination .pagination-next.disabled {
+  font-size: 0 !important;
+  position: relative !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Add arrow icons for previous/next instead of text */
+:host ::ng-deep .ngx-pagination .pagination-previous a::before,
+:host ::ng-deep .ngx-pagination .pagination-previous.disabled::before {
+  content: "←" !important;
+  font-size: 14px !important;
+}
+
+:host ::ng-deep .ngx-pagination .pagination-next a::before,
+:host ::ng-deep .ngx-pagination .pagination-next.disabled::before {
+  content: "→" !important;
+  font-size: 14px !important;
+}
+
+/* For disabled state */
+:host ::ng-deep .ngx-pagination .disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+}
+
+/* Hide all default text or symbols */
+:host ::ng-deep .ngx-pagination .pagination-previous a::after,
+:host ::ng-deep .ngx-pagination .pagination-next a::after,
+:host ::ng-deep .ngx-pagination .pagination-previous.disabled::after,
+:host ::ng-deep .ngx-pagination .pagination-next.disabled::after,
+:host ::ng-deep .ngx-pagination .pagination-previous span::after,
+:host ::ng-deep .ngx-pagination .pagination-next span::after {
+  display: none !important;
+}
+
+/* Fix ellipsis display issue */
+:host ::ng-deep .ngx-pagination .small-screen {
+  display: none !important;
+}
+
+:host ::ng-deep .ngx-pagination .pagination-previous.disabled,
+:host ::ng-deep .ngx-pagination .pagination-next.disabled {
+  background: rgba(240, 240, 240, 0.8) !important;
+  border-color: rgba(200, 200, 200, 0.4) !important;
+  color: #999999 !important;
+}
+
+/* Manage Ellipsis (...) */
+:host ::ng-deep .ngx-pagination .ellipsis {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  margin: 0 2px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #3b5ca8 !important;
+}
+
+/* Beautify container */
+:host ::ng-deep pagination-controls::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  border-radius: 3px;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(255, 87, 34, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
+}
+
+/* Add animation on page load */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
   }
-  
-  /* Individual item box */
-  .box {
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 10px; /* Rounded corners */
-    padding: 15px;
-    text-align: center;
-    background-color: #fff; /* White background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effect */
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  /* Hover effect for item box */
-  .box:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
-  }
-  
-  /* Item image */
-  .box img {
-    width: 100px; /* Fixed width */
-    height: 100px; /* Fixed height */
-    margin-bottom: 10px; /* Space below image */
-  }
-  
-  /* Item name */
-  .box h3 {
-    margin: 10px 0;
-    font-size: 1.2em; /* Slightly larger font */
-    color: #333; /* Dark text color */
-    text-transform: capitalize; /* Capitalize the first letter */
-  }
-  
-  /* Item details (category, cost, etc.) */
-  .box p {
-    margin: 5px 0;
-    font-size: 0.9em; /* Smaller font for details */
-    color: #666; /* Medium gray text color */
-  }
-  
-  /* Attributes list */
-  .box p span {
-    display: inline-block;
-    margin-right: 5px; /* Space between attributes */
-    padding: 3px 6px;
-    background-color: #f0f0f0; /* Light gray background */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 0.8em; /* Smaller font for attributes */
-    color: #555; /* Darker gray text color */
-  }
-  
-  /* Pagination controls */
-  .pagination-controls {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; /* Space above pagination */
-  }
-  
-  /* Pagination buttons */
-  .pagination-controls .ngx-pagination {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    gap: 5px; /* Space between buttons */
-  }
-  
-  .pagination-controls .ngx-pagination li {
-    display: inline-block;
-  }
-  
-  .pagination-controls .ngx-pagination a {
-    padding: 8px 12px;
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none;
-    color: #333; /* Dark text color */
-    background-color: #fff; /* White background */
-    transition: background-color 0.2s ease, color 0.2s ease; /* Smooth hover effect */
-  }
-  
-  .pagination-controls .ngx-pagination a:hover {
-    background-color: #007bff; /* Blue background on hover */
-    color: #fff; /* White text on hover */
-    border-color: #007bff; /* Blue border on hover */
-  }
-  
-  /* Active page button */
-  .pagination-controls .ngx-pagination .current {
-    padding: 8px 12px;
-    border-radius: 5px;
-    background-color: #007bff; /* Blue background */
-    color: #fff; /* White text */
-    border: 1px solid #007bff; /* Blue border */
-  }
+}
+
+.item-grid .box {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.item-grid .box:nth-child(1) { animation-delay: 0.1s; }
+.item-grid .box:nth-child(2) { animation-delay: 0.2s; }
+.item-grid .box:nth-child(3) { animation-delay: 0.3s; }
+.item-grid .box:nth-child(4) { animation-delay: 0.4s; }
+.item-grid .box:nth-child(5) { animation-delay: 0.5s; }
+.item-grid .box:nth-child(6) { animation-delay: 0.6s; }
+.item-grid .box:nth-child(7) { animation-delay: 0.}
