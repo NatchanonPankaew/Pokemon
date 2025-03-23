@@ -1,48 +1,33 @@
-<!-- 🔍 Search & 🔄 Refresh -->
-<div class="pokemon-search-container">
-  <input
-    type="text"
-    [(ngModel)]="searchTerm"
-    placeholder="Search Pokémon..."
-    class="pokemon-search-input"
-    (keyup.enter)="searchPokemon()"
-  />
-  <button (click)="searchPokemon()" class="pokemon-button search-button">
-    <span>🔍</span> Search
-  </button>
-  <button (click)="refreshPokemon()" class="pokemon-button refresh-button">
-    <span>🔄</span> Refresh
-  </button>
+
+<div class="pokemon-grid">
+  <div
+    class="box"
+    *ngFor="let pokemon of pokemon | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalPokemons }"
+  >
+    <!-- Navigate to Pokemon details page when clicked -->
+    <img [src]="pokemon.sprites.front_default" alt="Pokemon">
+    <h3>{{ pokemon.name }}</h3>
+    <p>
+      <b>Type:</b> {{ pokemon.types[0].type.name }}
+    </p>
+    <p>
+      <b>Height:</b> {{ pokemon.height }}
+    </p>
+    <p>
+      <b>Health:</b> {{ pokemon.stats[0].base_stat }}
+    </p>
+    <p>
+      <b>Attack Power:</b> {{ pokemon.stats[1].base_stat }}
+    </p>
+    <p>
+      <b>Defense Power:</b> {{ pokemon.stats[2].base_stat }}
+    </p>
+    <p>
+      <b>Speed:</b> {{ pokemon.stats[5].base_stat }}
+    </p>
+    <p><a [routerLink]="['/pokemon-details', pokemon.id]" class="view-details">View Details</a></p>
+  </div>
 </div>
 
-<!-- Pokemon Grid -->
-<div class="pokemon-grid">
-    <div
-      class="box"
-      *ngFor="let pokemon of filteredPokemon | paginate: { itemsPerPage: limit, currentPage: page }"
-
-    >
-      <img [src]="pokemon.sprites.front_default" alt="Pokemon">
-      <h3>{{ pokemon.name }}</h3>
-      <p>
-        <b>Type:</b> {{ pokemon.types[0].type.name }}
-      </p>
-      <p>
-        <b>Height:</b> {{ pokemon.height }}
-      </p>
-      <p>
-        <b>Health:</b> {{ pokemon.stats[0].base_stat }}
-      </p>
-      <p>
-        <b>Attack Power:</b> {{ pokemon.stats[1].base_stat }}
-      </p>
-      <p>
-        <b>Defense Power:</b> {{ pokemon.stats[2].base_stat }}
-      </p>
-      <p>
-        <b>Speed:</b> {{ pokemon.stats[5].base_stat }}
-      </p>
-    </div>
-  </div>
-
- <pagination-controls (pageChange)="page = $event; pokemon = []; getPokemons()" ></pagination-controls>
+<!-- Pagination Controls -->
+<pagination-controls (pageChange)="page = $event; pokemon = []; getPokemons()"></pagination-controls>

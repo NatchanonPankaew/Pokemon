@@ -1,41 +1,28 @@
-<div class="item-search-container">
-  <input
-    type="text"
-    [(ngModel)]="searchTerm"
-    placeholder="Search Items..."
-    class="item-search-input"
-    (keyup.enter)="searchItems()"
-  />
-  <button (click)="searchItems()" class="item-button search-button">
-    <span>🔍</span> Search
-  </button>
-  <button (click)="refreshItems()" class="item-button refresh-button">
-    <span>🔄</span> Refresh
-  </button>
-</div>
-
 <!-- Item Grid -->
 <div class="item-grid">
-  <div
-    class="box"
-    *ngFor="let item of filteredItems | paginate: { itemsPerPage: limit, currentPage: page }"
-  >
-    <img [src]="item.sprites?.default" alt="Item" style="width: 100px; height: 100px;" />
-    <h3>{{ item.name }}</h3>
-
-    <p><b>Category:</b> {{ item.category?.name }}</p>
-    <p><b>Cost:</b> {{ item.cost }}</p>
-    <p *ngIf="item.effect_entries?.length">
-      <b>Effect:</b> {{ item.effect_entries[0]?.effect }}
-    </p>
-    <p *ngIf="item.attributes?.length">
-      <b>Attributes:</b>
-      <span *ngFor="let attribute of item.attributes; let last = last">
-        {{ attribute.name }}<span *ngIf="!last">, </span>
-      </span>
-    </p>
+    <div
+      class="box"
+      *ngFor="let item of items | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalItems }"
+    >
+      <img [src]="item.sprites.default" alt="Item">
+      <h3>{{ item.name }}</h3>
+      <p>
+        <b>Category:</b> {{ item.category.name }}
+      </p>
+      <p>
+        <b>Cost:</b> {{ item.cost }}
+      </p>
+      <p>
+        <b>Effect:</b> {{ item.effect_entries[0].effect }}
+      </p>
+      <p>
+        <b>Attributes:</b>
+        <span *ngFor="let attribute of item.attributes">
+          {{ attribute.name }}
+        </span>
+      </p>
+    </div>
   </div>
-</div>
-
-<!-- Pagination -->
-<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+  
+  <!-- Pagination Controls -->
+  <pagination-controls (pageChange)="page = $event; items = []; getItems()"></pagination-controls>
