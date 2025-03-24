@@ -1,31 +1,48 @@
-<form [formGroup]="searchForm" (ngSubmit)="searchPokemon()" style="margin: 1rem 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+<!-- 🔍 Search & 🔄 Refresh -->
+<div class="pokemon-search-container">
   <input
     type="text"
-    formControlName="keyword"
+    [(ngModel)]="searchTerm"
     placeholder="Search Pokémon..."
-    style="padding: 8px; max-width: 300px; width: 100%;"
+    class="pokemon-search-input"
+    (keyup.enter)="searchPokemon()"
   />
-  <button type="submit" style="padding: 8px 12px; background-color: #00b894; color: white; border: none; border-radius: 4px;">
-    🔍 Search
+  <button (click)="searchPokemon()" class="pokemon-button search-button">
+    <span>🔍</span> Search
   </button>
-  <button type="button" (click)="refreshPokemon()" style="padding: 8px 12px; background-color: #3b4cca; color: white; border: none; border-radius: 4px;">
-    🔄 Refresh
+  <button (click)="refreshPokemon()" class="pokemon-button refresh-button">
+    <span>🔄</span> Refresh
   </button>
-</form>
-
-<!-- Pokémon Cards -->
-<div class="pokemon-grid">
-  <div class="box" *ngFor="let pokemon of filteredPokemon | paginate: { itemsPerPage: limit, currentPage: page }">
-    <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" />
-    <h3>{{ pokemon.name }}</h3>
-    <p><b>Type:</b> {{ pokemon.types[0].type.name }}</p>
-    <p><b>Height:</b> {{ pokemon.height }}</p>
-    <p><b>Health:</b> {{ pokemon.stats[0].base_stat }}</p>
-    <p><b>Attack:</b> {{ pokemon.stats[1].base_stat }}</p>
-    <p><b>Defense:</b> {{ pokemon.stats[2].base_stat }}</p>
-    <p><b>Speed:</b> {{ pokemon.stats[5].base_stat }}</p>
-  </div>
 </div>
 
-<!-- Pagination -->
-<pagination-controls (pageChange)="page = $event"></pagination-controls>
+<!-- Pokemon Grid -->
+<div class="pokemon-grid">
+    <div
+      class="box"
+      *ngFor="let pokemon of filteredPokemon | paginate: { itemsPerPage: limit, currentPage: page }"
+
+    >
+      <img [src]="pokemon.sprites.front_default" alt="Pokemon">
+      <h3>{{ pokemon.name }}</h3>
+      <p>
+        <b>Type:</b> {{ pokemon.types[0].type.name }}
+      </p>
+      <p>
+        <b>Height:</b> {{ pokemon.height }}
+      </p>
+      <p>
+        <b>Health:</b> {{ pokemon.stats[0].base_stat }}
+      </p>
+      <p>
+        <b>Attack Power:</b> {{ pokemon.stats[1].base_stat }}
+      </p>
+      <p>
+        <b>Defense Power:</b> {{ pokemon.stats[2].base_stat }}
+      </p>
+      <p>
+        <b>Speed:</b> {{ pokemon.stats[5].base_stat }}
+      </p>
+    </div>
+  </div>
+
+ <pagination-controls (pageChange)="page = $event; pokemon = []; getPokemons()" ></pagination-controls>

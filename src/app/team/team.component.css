@@ -1,438 +1,1443 @@
 /* team.component.css */
 :root {
-    --primary: #ee1515;
-    --primary-dark: #cc0000;
-    --primary-light: #ff6666;
-    --secondary: #3b5ba7;
-    --secondary-dark: #1a3c8a;
-    --accent: #ffcb05;
-    --text: #121111;
-    --text-light: #161616;
-    --text-lighter: #999999;
-    --background: #f8f9fa;
-    --card: #ffffff;
-    --card-hover: #f0f0f0;
-    --border: #e0e0e0;
-    --border-radius: 12px;
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --transition: all 0.25s ease;
-    
-    /* Type colors - Slightly darker for better contrast with white text */
-    --type-normal: #9D9D6B;
-    --type-fire: #E16926;
-    --type-water: #5374D5;
-    --type-grass: #67B144;
-    --type-electric: #E7BB18;
-    --type-ice: #7DCACA;
-    --type-fighting: #B02C22;
-    --type-poison: #8E3A8E;
-    --type-ground: #CFB058;
-    --type-flying: #9D82E5;
-    --type-psychic: #EB4D7C;
-    --type-bug: #9CAB18;
-    --type-rock: #A89232;
-    --type-ghost: #644E87;
-    --type-dark: #634D3F;
-    --type-dragon: #6B33E0;
-    --type-steel: #A7A7BC;
-    --type-fairy: #DE8599;
-  }
+  /* โทนสีหลัก - ปรับให้เข้ากับธีมโปเกมอนมากขึ้น */
+  --primary: #EE1515;
+  --primary-dark: #C00000;
+  --primary-light: #FB6C6C;
+  --secondary: #3D7DCA;
+  --secondary-dark: #2A52BE;
+  --secondary-light: #75AADB;
+  --accent: #FFCC00;
+  --accent-dark: #D5A100;
+  --accent-light: #FFE566;
+  --pokeball-white: #F0F0F0;
+  --pokeball-black: #222224;
   
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  }
+  /* คุณภาพสีข้อความ */
+  --text: #303030;
+  --text-light: #505050;
+  --text-lighter: #909090;
+  --background: #F5F7FA;
+  --card: #FFFFFF;
+  --card-hover: #F8F8F8;
+  --border: #E0E0E0;
+  --border-radius: 12px;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   
-  body {
-    background-color: var(--background);
-    color: var(--text);
-    line-height: 1.6;
-  }
+  /* สีประเภทโปเกมอน - ใช้สีที่เป็นทางการจาก Pokemon games */
+  --type-normal: #A8A878;
+  --type-fire: #F08030;
+  --type-water: #6890F0;
+  --type-grass: #78C850;
+  --type-electric: #F8D030;
+  --type-ice: #98D8D8;
+  --type-fighting: #C03028;
+  --type-poison: #A040A0;
+  --type-ground: #E0C068;
+  --type-flying: #A890F0;
+  --type-psychic: #F85888;
+  --type-bug: #A8B820;
+  --type-rock: #B8A038;
+  --type-ghost: #705898;
+  --type-dark: #705848;
+  --type-dragon: #7038F8;
+  --type-steel: #B8B8D0;
+  --type-fairy: #EE99AC;
   
-  .team-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+  /* สี Gradient สำหรับ type defense */
+  --type-normal-def: linear-gradient(135deg, #A8A878, #8A8A59);
+  --type-fire-def: linear-gradient(135deg, #F08030, #C76628);
+  --type-water-def: linear-gradient(135deg, #6890F0, #386CEB);
+  --type-grass-def: linear-gradient(135deg, #78C850, #5CA935);
+  --type-electric-def: linear-gradient(135deg, #F8D030, #E2B70E);
+  --type-ice-def: linear-gradient(135deg, #98D8D8, #69C6C6);
+  --type-fighting-def: linear-gradient(135deg, #C03028, #9D211A);
+  --type-poison-def: linear-gradient(135deg, #A040A0, #803380);
+  --type-ground-def: linear-gradient(135deg, #E0C068, #D4B24A);
+  --type-flying-def: linear-gradient(135deg, #A890F0, #7E61EB);
+  --type-psychic-def: linear-gradient(135deg, #F85888, #F61C60);
+  --type-bug-def: linear-gradient(135deg, #A8B820, #8D9A17);
+  --type-rock-def: linear-gradient(135deg, #B8A038, #A2891D);
+  --type-ghost-def: linear-gradient(135deg, #705898, #554374);
+  --type-dark-def: linear-gradient(135deg, #705848, #574537);
+  --type-dragon-def: linear-gradient(135deg, #7038F8, #4C0BD8);
+  --type-steel-def: linear-gradient(135deg, #B8B8D0, #9797B9);
+  --type-fairy-def: linear-gradient(135deg, #EE99AC, #E86984);
   
-  /* Header Styles */
-  .team-header {
-    text-align: center;
-    margin-bottom: 30px;
-    position: relative;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    color: var(--primary-dark);
-    margin-bottom: 5px;
-    font-weight: 800;
-  }
-  
-  .sub {
-    color: var(--text-light);
-    font-size: 1rem;
-    margin-bottom: 20px;
-  }
-  
-  .format-selector {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-  
-  .format-dropdown {
-    padding: 8px 16px;
-    border: 2px solid var(--primary);
-    border-radius: 8px;
-    background-color: white;
-    color: var(--text);
-    font-weight: 500;
-    min-width: 150px;
-  }
-  
-  .action-button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--primary);
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  
-  .action-button:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-  }
-  
-  .action-button.new-team {
-    background-color: var(--secondary);
-  }
-  
-  .action-button.new-team:hover {
-    background-color: var(--secondary-dark);
-  }
-  
-  .action-button.import-export {
-    background-color: var(--text);
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: var(--secondary-dark);
-    border-bottom: 2px solid var(--border);
-    padding-bottom: 10px;
-  }
-  
-  /* Main Grid Layout */
+  /* สำหรับไอคอนเผ่าที่แสดงเป็น mini-badge */
+  --type-icon-size: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f0f0f0' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+.team-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ===== ส่วนหัว - ทำให้เป็นธีมโปเกมอนที่เด่นชัด ===== */
+.team-header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  padding: 25px;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  color: white;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40 Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.team-header::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+  opacity: 0.8;
+}
+
+h1 {
+  font-size: 2.8rem;
+  color: black;
+  margin-bottom: 5px;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
+}
+
+.sub {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+.format-selector {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.format-dropdown {
+  padding: 10px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: black;
+  font-weight: 500;
+  min-width: 180px;
+  transition: var(--transition);
+  outline: none;
+}
+
+.format-dropdown:hover, .format-dropdown:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  outline: none;
+}
+
+.action-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.action-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+.action-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.action-button.new-team {
+  background-color: #FFCC00;
+  color: white;
+}
+
+.action-button.new-team:hover {
+  background-color:#FFE566;
+}
+
+.action-button.save-team {
+  background-color: #3D7DCA;
+  color: white;
+}
+
+.action-button.save-team:hover {
+  background-color: #75AADB;
+}
+
+.action-button.import-export {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #C00000;
+}
+
+.action-button.import-export:hover {
+  background-color: white;
+  color: var(--primary);
+}
+
+.section-title {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: var(--secondary-dark);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(61, 125, 202, 0.2);
+}
+
+/* ===== เค้าโครงหลัก ===== */
+.main-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+/* ===== ส่วนสร้างทีม ===== */
+.team-builder-section {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 25px;
+  height: auto;
+  min-height: 750px;
+}
+
+.team-slot {
+  min-height: 240px;
+  display: flex;
+}
+
+/* ===== การ์ดโปเกมอน - ทำให้ดูมีสีสันมากขึ้น ===== */
+.pokemon-card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 100%;
+  border: 1px solid #E0E0E0;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.pokemon-card.empty-slot {
+  background-color: rgba(0, 0, 0, 0.02);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 240px;
+  cursor: pointer;
+  border: 2px dashed #E0E0E0;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f0f0f0' fill-rule='evenodd'%3E%3Ccircle cx='20' cy='20' r='10'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.pokemon-card.empty-slot:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: #FB6C6C;
+}
+
+.empty-slot-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #909090;
+}
+
+.add-pokemon-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #FB6C6C;
+  background-color: rgba(238, 21, 21, 0.1);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pokemon-card.empty-slot:hover .add-pokemon-icon {
+  background-color: rgba(238, 21, 21, 0.2);
+  transform: scale(1.1);
+}
+
+.pokemon-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #3D7DCA, #2A52BE);
+  color: white;
+}
+
+.pokemon-sprite {
+  width: 70px;
+  height: 70px;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pokemon-sprite img {
+  max-width: 100%;
+  max-height: 100%;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pokemon-card:hover .pokemon-sprite img {
+  transform: scale(1.1);
+}
+
+.pokemon-selector {
+  flex: 1;
+}
+
+.pokemon-select, .ability-select, .item-select, .move-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.15);
+  font-size: 0.95rem;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pokemon-select:focus, .ability-select:focus, .item-select:focus, .move-select:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.pokemon-details {
+  padding: 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.type-badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.type-badge {
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.type-badge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+  pointer-events: none;
+}
+
+.ability-item-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.ability-item-row select, .moves-container select {
+  padding: 10px 12px;
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  background-color: white;
+  color: #303030;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ability-item-row select:focus, .moves-container select:focus {
+  outline: none;
+  border-color: #3D7DCA;
+  box-shadow: 0 0 0 2px rgba(61, 125, 202, 0.2);
+}
+
+.moves-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.move-row {
+  width: 100%;
+}
+
+/* ===== สถิติโปเกมอน - ใช้สีตามแบบเกม ===== */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  margin-top: auto; /* ให้ stats อยู่ด้านล่างของการ์ด */
+}
+
+.quick-stats::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f0f0f0' fill-opacity='0.8' fill-rule='evenodd'%3E%3Cpath d='M0 0h4v4H0V0zm8 0h4v4H8V0zm8 0h4v4h-4V0zm8 0h4v4h-4V0zm-24 8h4v4H0V8zm8 0h4v4H8V8zm8 0h4v4h-4V8zm8 0h4v4h-4V8zm-24 8h4v4H0v-4zm8 0h4v4H8v-4zm8 0h4v4h-4v-4zm8 0h4v4h-4v-4zm-24 8h4v4H0v-4zm8 0h4v4H8v-4zm8 0h4v4h-4v-4zm8 0h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
+  z-index: 0;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.stat-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #909090;
+  margin-bottom: 6px;
+}
+
+.stat-bar {
+  height: 8px;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-width: 5%; /* Ensure a minimum width for visibility */
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4));
+  pointer-events: none;
+}
+
+.stat-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-top: 6px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* สีสำหรับแต่ละสถิติ */
+.stat-column:nth-child(1) .stat-bar {
+  background: linear-gradient(to right, #FF5959, #ff8080); /* HP - Red */
+}
+
+.stat-column:nth-child(2) .stat-bar {
+  background: linear-gradient(to right, #F5AC78, #f7c4a3); /* Atk - Orange */
+}
+
+.stat-column:nth-child(3) .stat-bar {
+  background: linear-gradient(to right, #FAE078, #f9eaae); /* Def - Yellow */
+}
+
+.stat-column:nth-child(4) .stat-bar {
+  background: linear-gradient(to right, #9DB7F5, #c7d4f9); /* SpA - Blue */
+}
+
+.stat-column:nth-child(5) .stat-bar {
+  background: linear-gradient(to right, #A7DB8D, #c9eab8); /* SpD - Green */
+}
+
+.stat-column:nth-child(6) .stat-bar {
+  background: linear-gradient(to right, #FA92B2, #ffc3d3); /* Spd - Pink */
+}
+
+/* เอฟเฟกต์ hover สำหรับสถิติ */
+.stat-column:hover .stat-bar {
+  transform: scaleY(1.5);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.stat-column:hover .stat-value {
+  transform: scale(1.1);
+}
+
+/* สีสำหรับสถิติที่สูงและต่ำ */
+.stat-value.high {
+  color: #2e7d32; /* สีเขียวเข้ม */
+  font-weight: 800;
+}
+
+.stat-value.low {
+  color: #c62828; /* สีแดงเข้ม */
+  font-weight: 800;
+}
+
+/* ส่วนแสดงสถิติรวม */
+.total-stats {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-top: 10px;
+  margin-top: 8px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.total-stats span {
+  color: #EE1515;
+  font-weight: 800;
+}
+
+/* สีแตกต่างกันสำหรับแต่ละสถิติ */
+.stat-column:nth-child(1) .stat-bar {
+  background: linear-gradient(to right, #FF5959, #ff8080); /* HP - Red */
+}
+
+.stat-column:nth-child(2) .stat-bar {
+  background: linear-gradient(to right, #F5AC78, #f7c4a3); /* Atk - Orange */
+}
+
+.stat-column:nth-child(3) .stat-bar {
+  background: linear-gradient(to right, #FAE078, #f9eaae); /* Def - Yellow */
+}
+
+.stat-column:nth-child(4) .stat-bar {
+  background: linear-gradient(to right, #9DB7F5, #c7d4f9); /* SpA - Blue */
+}
+
+.stat-column:nth-child(5) .stat-bar {
+  background: linear-gradient(to right, #A7DB8D, #c9eab8); /* SpD - Green */
+}
+
+.stat-column:nth-child(6) .stat-bar {
+  background: linear-gradient(to right, #FA92B2, #ffc3d3); /* Spd - Pink */
+}
+
+/* การแสดงผลสถิติที่สูงหรือต่ำเป็นพิเศษ */
+.stat-value.high {
+  color: #2e7d32; /* สีเขียวเข้มสำหรับสถิติที่สูง */
+  font-weight: 800;
+  position: relative;
+}
+
+.stat-value.high::after {
+  content: "★";
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  font-size: 0.7rem;
+  color: #2e7d32;
+}
+
+.stat-value.low {
+  color: #c62828; /* สีแดงเข้มสำหรับสถิติที่ต่ำ */
+  font-weight: 800;
+}
+
+/* เอฟเฟกต์เมื่อ hover สถิติ */
+.stat-column:hover .stat-bar {
+  transform: scaleY(1.8);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.stat-column:hover .stat-value {
+  transform: scale(1.2);
+}
+
+/* ส่วนแสดงสถิติรวม */
+.total-stats {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-top: 12px;
+  margin-top: 10px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.total-stats span {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  padding: 0 5px;
+}
+
+/* ===== พื้นที่วิเคราะห์ ===== */
+.analysis-area {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.analysis-card {
+  background-color: var(--card);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.analysis-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: var(--secondary-dark);
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  border-radius: 2px;
+}
+
+/* ตาราง Defense Grid ที่มีสีสันมากขึ้น */
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.type-box {
+  text-align: center;
+  padding: 12px 5px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 2px solid transparent;
+}
+
+.type-box:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.effectiveness-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-top: 8px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 3px 10px;
+  margin: 6px -5px 0;
+  transition: var(--transition);
+  position: relative;
+}
+
+/* ใส่สีตาม defense values */
+.effectiveness-value[data-value="0"] {
+  background-color: #343a40;
+  color: white;
+}
+
+.effectiveness-value[data-value^="-"] {
+  background-color: rgba(220, 53, 69, 0.25);
+  color: #c82333;
+}
+
+.effectiveness-value[data-value^="2"], 
+.effectiveness-value[data-value^="3"] {
+  background-color: rgba(40, 167, 69, 0.25);
+  color: #218838;
+}
+
+/* ส่วนภาพรวมทีม */
+.team-overview {
+  border-top: 5px solid var(--secondary);
+  background: linear-gradient(to bottom, #fbfbfb, #ffffff);
+  position: relative;
+}
+
+.team-overview::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%233d7dca' fill-opacity='0.1'/%3E%3Ccircle cx='50' cy='50' r='40' fill='white' stroke='%233d7dca' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='15' fill='%233d7dca' fill-opacity='0.2'/%3E%3Ccircle cx='50' cy='50' r='10' fill='white' stroke='%233d7dca' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: contain;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.team-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.team-strength-weakness {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.team-strengths, .team-weaknesses {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.team-strengths {
+  border-left: 4px solid #28a745;
+}
+
+.team-weaknesses {
+  border-left: 4px solid #dc3545;
+}
+
+.team-strengths:hover, .team-weaknesses:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+h4 {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--text);
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.team-strengths h4::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #28a745, transparent);
+}
+
+.team-weaknesses h4::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #dc3545, transparent);
+}
+
+.type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.type-tag {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: var(--transition);
+}
+
+.type-tag:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.empty-message {
+  color: var(--text-lighter);
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+}
+
+/* สถิติทีมเฉลี่ย */
+.team-stat-summary {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.team-stat-summary:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.team-stat-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stat-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.stat-name {
+  width: 40px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: right;
+  color: var(--text-light);
+}
+
+.stat-bar-container {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.05);
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+  width: 35px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: right;
+  color: var(--secondary-dark);
+}
+
+/* ตั้งค่า defensive grid ที่มีสีสันมากขึ้น */
+.defensive-grid .type-box.type-normal { background: var(--type-normal-def); }
+.defensive-grid .type-box.type-fire { background: var(--type-fire-def); }
+.defensive-grid .type-box.type-water { background: var(--type-water-def); }
+.defensive-grid .type-box.type-grass { background: var(--type-grass-def); }
+.defensive-grid .type-box.type-electric { background: var(--type-electric-def); }
+.defensive-grid .type-box.type-ice { background: var(--type-ice-def); }
+.defensive-grid .type-box.type-fighting { background: var(--type-fighting-def); }
+.defensive-grid .type-box.type-poison { background: var(--type-poison-def); }
+.defensive-grid .type-box.type-ground { background: var(--type-ground-def); }
+.defensive-grid .type-box.type-flying { background: var(--type-flying-def); }
+.defensive-grid .type-box.type-psychic { background: var(--type-psychic-def); }
+.defensive-grid .type-box.type-bug { background: var(--type-bug-def); }
+.defensive-grid .type-box.type-rock { background: var(--type-rock-def); }
+.defensive-grid .type-box.type-ghost { background: var(--type-ghost-def); }
+.defensive-grid .type-box.type-dark { background: var(--type-dark-def); }
+.defensive-grid .type-box.type-dragon { background: var(--type-dragon-def); }
+.defensive-grid .type-box.type-steel { background: var(--type-steel-def); }
+.defensive-grid .type-box.type-fairy { background: var(--type-fairy-def); }
+
+/* เมื่อไม่มีข้อมูล (ค่าคือ 0) สำหรับ defensive grid */
+.defensive-grid .type-box:not([class*="type-"]) {
+  background-color: #f0f0f0;
+  color: var(--text-light);
+  text-shadow: none;
+  box-shadow: none;
+}
+
+/* เอฟเฟกต์เพิ่มเติมของ effectiveness values */
+.defensive-grid .type-box .effectiveness-value {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+}
+
+.defensive-grid .type-box[data-value]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  z-index: 100;
+}
+
+/* ส่วนคำแนะนำ */
+.suggestions {
+  border-top: 5px solid var(--accent);
+  background: linear-gradient(to bottom, #fffcf2, #ffffff);
+}
+
+.suggestion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-left: 4px solid var(--primary-light);
+}
+
+.suggestion-item:nth-child(1) { border-left-color: var(--primary); }
+.suggestion-item:nth-child(2) { border-left-color: var(--secondary); }
+.suggestion-item:nth-child(3) { border-left-color: var(--accent); }
+
+.suggestion-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.suggestion-text {
+  flex: 1;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* ===== ส่วนตัวกรอง ===== */
+.advanced-section {
+  background-color: var(--card);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-column label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.filter-column select, .filter-column input {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: white;
+  transition: var(--transition);
+}
+
+.filter-column select:focus, .filter-column input:focus, .search-input:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 2px rgba(61, 125, 202, 0.2);
+}
+
+.search-input {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: white;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.toggle-container input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.toggle-container input[type="checkbox"]:checked {
+  background-color: var(--secondary);
+}
+
+.toggle-container input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  top: 2px;
+  left: 2px;
+  transition: var(--transition);
+}
+
+.toggle-container input[type="checkbox"]:checked::before {
+  left: 22px;
+}
+
+.toggle-label {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* ส่วนท้าย */
+.team-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-lighter);
+  position: relative;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  color: var(--text-lighter);
+  position: relative;
+  z-index: 2;
+}
+
+.team-footer::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23f0f0f0'/%3E%3Ccircle cx='50' cy='50' r='40' fill='white' stroke='%23f0f0f0' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='15' fill='%23f0f0f0'/%3E%3Ccircle cx='50' cy='50' r='10' fill='white' stroke='%23f0f0f0' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: contain;
+  opacity: 0.5;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== สีประเภทโปเกมอน ===== */
+.type-normal, .type-tag.type-normal { background-color: var(--type-normal); }
+.type-fire, .type-tag.type-fire { background-color: var(--type-fire); }
+.type-water, .type-tag.type-water { background-color: var(--type-water); }
+.type-grass, .type-tag.type-grass { background-color: var(--type-grass); }
+.type-electric, .type-tag.type-electric { background-color: var(--type-electric); }
+.type-ice, .type-tag.type-ice { background-color: var(--type-ice); }
+.type-fighting, .type-tag.type-fighting { background-color: var(--type-fighting); }
+.type-poison, .type-tag.type-poison { background-color: var(--type-poison); }
+.type-ground, .type-tag.type-ground { background-color: var(--type-ground); }
+.type-flying, .type-tag.type-flying { background-color: var(--type-flying); }
+.type-psychic, .type-tag.type-psychic { background-color: var(--type-psychic); }
+.type-bug, .type-tag.type-bug { background-color: var(--type-bug); }
+.type-rock, .type-tag.type-rock { background-color: var(--type-rock); }
+.type-ghost, .type-tag.type-ghost { background-color: var(--type-ghost); }
+.type-dark, .type-tag.type-dark { background-color: var(--type-dark); }
+.type-dragon, .type-tag.type-dragon { background-color: var(--type-dragon); }
+.type-steel, .type-tag.type-steel { background-color: var(--type-steel); }
+.type-fairy, .type-tag.type-fairy { background-color: var(--type-fairy); }
+
+/* ===== Animation ลูกเล่นเพิ่มเติม ===== */
+/* Pokemon card animation */
+.pokemon-card-animated {
+  animation: cardReveal 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes cardReveal {
+  from { transform: translateY(10px); opacity: 0.6; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Stat bar animation */
+@keyframes statBarGrow {
+  from { width: 0; }
+  to { width: var(--target-width); }
+}
+
+.pokemon-card-animated .stat-bar {
+  animation: statBarGrow 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Type Effectiveness เพิ่มเติม */
+.effectiveness-value.immune {
+  background-color: #343a40;
+  color: white;
+  font-weight: 900;
+}
+
+.effectiveness-value.resistant {
+  background-color: #28a745;
+  color: white;
+}
+
+.effectiveness-value.weak {
+  background-color: #dc3545;
+  color: white;
+}
+
+.effectiveness-value.neutral {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Animations สำหรับคำแนะนำ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.suggestion-item {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.suggestion-item:nth-child(1) { animation-delay: 0s; }
+.suggestion-item:nth-child(2) { animation-delay: 0.15s; }
+.suggestion-item:nth-child(3) { animation-delay: 0.3s; }
+
+/* สไตล์สำหรับ title ที่แสดงเผ่าโปเกมอน */
+[title] {
+  position: relative;
+  cursor: help;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+[title]:hover {
+  transform: scale(1.05);
+}
+
+/* เมื่อ hover เหนือ title จะแสดงข้อมูลเพิ่มเติม */
+[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* สีพื้นหลังตามเผ่าโปเกมอน */
+[title*="Normal"] { background-color: #A8A878; color: white; }
+[title*="Fire"] { background-color: #F08030; color: white; }
+[title*="Water"] { background-color: #6890F0; color: white; }
+[title*="Grass"] { background-color: #78C850; color: white; }
+[title*="Electric"] { background-color: #F8D030; color: black; }
+[title*="Ice"] { background-color: #98D8D8; color: black; }
+[title*="Fighting"] { background-color: #C03028; color: white; }
+[title*="Poison"] { background-color: #A040A0; color: white; }
+[title*="Ground"] { background-color: #E0C068; color: black; }
+[title*="Flying"] { background-color: #A890F0; color: white; }
+[title*="Psychic"] { background-color: #F85888; color: white; }
+[title*="Bug"] { background-color: #A8B820; color: white; }
+[title*="Rock"] { background-color: #B8A038; color: white; }
+[title*="Ghost"] { background-color: #705898; color: white; }
+[title*="Dark"] { background-color: #705848; color: white; }
+[title*="Dragon"] { background-color: #7038F8; color: white; }
+[title*="Steel"] { background-color: #B8B8D0; color: black; }
+[title*="Fairy"] { background-color: #EE99AC; color: black; }
+
+/* เมื่อ hover จะมีการเปลี่ยนแปลงตามประเภทโปเกมอน */
+[title*="Normal"]:hover::after { background-color: #A8A878; }
+[title*="Fire"]:hover::after { background-color: #F08030; }
+[title*="Water"]:hover::after { background-color: #6890F0; }
+[title*="Grass"]:hover::after { background-color: #78C850; }
+[title*="Electric"]:hover::after { background-color: #F8D030; color: #333; }
+[title*="Ice"]:hover::after { background-color: #98D8D8; color: #333; }
+[title*="Fighting"]:hover::after { background-color: #C03028; }
+[title*="Poison"]:hover::after { background-color: #A040A0; }
+[title*="Ground"]:hover::after { background-color: #E0C068; color: #333; }
+[title*="Flying"]:hover::after { background-color: #A890F0; }
+[title*="Psychic"]:hover::after { background-color: #F85888; }
+[title*="Bug"]:hover::after { background-color: #A8B820; }
+[title*="Rock"]:hover::after { background-color: #B8A038; }
+[title*="Ghost"]:hover::after { background-color: #705898; }
+[title*="Dark"]:hover::after { background-color: #705848; }
+[title*="Dragon"]:hover::after { background-color: #7038F8; }
+[title*="Steel"]:hover::after { background-color: #B8B8D0; color: #333; }
+[title*="Fairy"]:hover::after { background-color: #EE99AC; color: #333; }
+
+/* สถานะโหลด */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  border-radius: var(--border-radius);
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(61, 125, 202, 0.2);
+  border-bottom-color: var(--secondary);
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* สถานะว่างเปล่า */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  color: var(--text-lighter);
+  text-align: center;
+}
+
+.empty-state-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--secondary-light);
+  background-color: rgba(61, 125, 202, 0.1);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.empty-state-text {
+  font-size: 1rem;
+  max-width: 300px;
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
   .main-grid {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 30px;
-    margin-bottom: 30px;
-  }
-  
-  /* Team Builder Section */
-  .team-builder-section {
-    background-color: var(--card);
-    border-radius: var(--border-radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-  }
-  
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  /* Pokemon Card Styles */
-  .pokemon-card {
-    background-color: var(--card);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: var(--transition);
-    border: 1px solid var(--border);
-    height: 100%;
-  }
-  
-  .pokemon-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-3px);
-  }
-  
-  .pokemon-card.empty-slot {
-    background-color: rgba(0, 0, 0, 0.03);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 250px;
-    cursor: pointer;
-  }
-  
-  .empty-slot-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--text-lighter);
-  }
-  
-  .add-pokemon-icon {
-    font-size: 3rem;
-    margin-bottom: 10px;
-  }
-  
-  .pokemon-header {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
-    color: white;
-  }
-  
-  .pokemon-sprite {
-    width: 64px;
-    height: 64px;
-    margin-right: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .pokemon-sprite img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-  
-  .pokemon-selector {
-    flex: 1;
-  }
-  
-  .pokemon-select, .ability-select, .item-select, .move-select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-  }
-  
-  .pokemon-details {
-    padding: 15px;
-  }
-  
-  .type-badges {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  
-  .type-badge {
-    padding: 3px 10px;
-    border-radius: 16px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  }
-  
-  .ability-item-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-  
-  .moves-container {
-    display: grid;
     grid-template-columns: 1fr;
-    gap: 8px;
-    margin-bottom: 15px;
   }
   
-  .move-row {
-    width: 100%;
+  .filter-row {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  /* Stats Display */
-  .quick-stats {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-    background-color: #f5f5f5;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+  .team-header::before {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr;
   }
   
-  .stat-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .stat-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--text-lighter);
-    margin-bottom: 5px;
-  }
-  
-  .stat-bar {
-    height: 6px;
-    background: linear-gradient(to right, var(--secondary-dark), var(--secondary));
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Analysis Area */
-  .analysis-area {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  /* Color coding for defensive and coverage grids */
-  .defensive-grid .type-box {
-    background-color: #f0f0f0;
-    color: var(--text);
-    text-shadow: none;
-  }
-  
-  .defensive-grid .type-box[class*="type-"] {
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  }
-  
-  .analysis-card {
-    background-color: var(--card);
-    border-radius: var(--border-radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-  }
-  
-  h3 {
-    font-size: 1.25rem;
-    margin-bottom: 15px;
-    color: var(--secondary-dark);
-    font-weight: 700;
-    text-align: center;
-    position: relative;
-    padding-bottom: 8px;
-  }
-  
-  h3::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    border-radius: 2px;
-  }
-  
-  .type-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  
-  .type-box {
-    text-align: center;
-    padding: 8px 5px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
-    position: relative;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
-  }
-  
-  .effectiveness-value {
-    font-size: 1.1rem;
-    font-weight: 800;
-    margin-top: 4px;
-    background-color: rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
-    padding: 2px 8px;
-    margin: 4px -5px 0;
-  }
-  
-  /* Team Overview Section */
-  .team-overview {
-    border-top: 4px solid var(--secondary);
-    background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+  .filter-row {
+    grid-template-columns: 1fr;
   }
   
   .team-strength-weakness {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: 1fr;
   }
   
-  .team-strengths, .team-weaknesses {
-    background-color: #f8f9fa;
-    padding: 10px;
-    border-radius: 8px;
+  .quick-stats {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 12px;
   }
   
-  h4 {
-    font-size: 0.9rem;
-    text-align: center;
-    margin-bottom: 10px;
-    color: var(--text);
-  }
-  
-  .type-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
-  }
-  
-  .type-tag {
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Suggestions Section */
-  .suggestions {
-    border-top: 4px solid var(--accent);
-  }
-  
-  .suggestion-list {
-    display: flex;
+  .format-selector {
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
   }
   
-  .suggestion-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    font-size: 0.9rem;
+  .format-dropdown {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .action-button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .type-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .team-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .stat-value {
+    font-size: 0.8rem;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem;
   }
   
   .suggestion-icon {
@@ -440,502 +1445,26 @@
   }
   
   .suggestion-text {
-    flex: 1;
-  }
-  
-  /* Filters and Advanced Section */
-  .advanced-section {
-    background-color: var(--card);
-    border-radius: var(--border-radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-    margin-bottom: 30px;
-  }
-  
-  .tab-button {
-    background: none;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-weight: 500;
-    border-radius: 6px;
-    transition: var(--transition);
-    color: var(--text);
-  }
-  
-  .tab-button:hover {
-    background-color: rgba(59, 91, 167, 0.1);
-  }
-  
-  .tab-button.active {
-    background-color: var(--secondary);
-    color: white;
-  }
-  
-  .filters-panel {
-    display: block;
-  }
-  
-  .filter-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .filter-column {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .filter-column label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-light);
-  }
-  
-  .filter-column select, .filter-column input {
-    padding: 10px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background-color: white;
-  }
-  
-  .search-input {
-    padding: 10px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background-color: white;
-    width: 100%;
-  }
-  
-  .filter-toggles {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .toggle-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-  }
-  
-  .toggle-label {
-    font-size: 0.9rem;
-    color: var(--text);
-  }
-  
-  /* Footer Styles */
-  .team-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 20px 0;
-    border-top: 1px solid var(--border);
-  }
-  
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-  }
-  
-  .footer-link {
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: var(--transition);
-  }
-  
-  .footer-link:hover {
-    color: var(--primary);
-  }
-  
-  .footer-copyright {
-    font-size: 0.8rem;
-    color: var(--text-lighter);
-  }
-  
-  /* Pokemon Type Colors */
-  .type-normal, .type-tag.type-normal { background-color: var(--type-normal); }
-  .type-fire, .type-tag.type-fire { background-color: var(--type-fire); }
-  .type-water, .type-tag.type-water { background-color: var(--type-water); }
-  .type-grass, .type-tag.type-grass { background-color: var(--type-grass); }
-  .type-electric, .type-tag.type-electric { background-color: var(--type-electric); }
-  .type-ice, .type-tag.type-ice { background-color: var(--type-ice); }
-  .type-fighting, .type-tag.type-fighting { background-color: var(--type-fighting); }
-  .type-poison, .type-tag.type-poison { background-color: var(--type-poison); }
-  .type-ground, .type-tag.type-ground { background-color: var(--type-ground); }
-  .type-flying, .type-tag.type-flying { background-color: var(--type-flying); }
-  .type-psychic, .type-tag.type-psychic { background-color: var(--type-psychic); }
-  .type-bug, .type-tag.type-bug { background-color: var(--type-bug); }
-  .type-rock, .type-tag.type-rock { background-color: var(--type-rock); }
-  .type-ghost, .type-tag.type-ghost { background-color: var(--type-ghost); }
-  .type-dark, .type-tag.type-dark { background-color: var(--type-dark); }
-  .type-dragon, .type-tag.type-dragon { background-color: var(--type-dragon); }
-  .type-steel, .type-tag.type-steel { background-color: var(--type-steel); }
-  .type-fairy, .type-tag.type-fairy { background-color: var(--type-fairy); }
-  
-  /* Responsive Design */
-  @media (max-width: 1100px) {
-    .main-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .filter-row {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .team-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .filter-row {
-      grid-template-columns: 1fr;
-    }
-    
-    .team-strength-weakness {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .type-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .team-header h1 {
-      font-size: 2rem;
-    }
-    
-    .format-selector {
-      flex-direction: column;
-    }
-  }
-
-  /* เพิ่มเติมในไฟล์ CSS ที่มีอยู่แล้ว */
-
-/* Team Strengths and Weaknesses */
-.team-strengths, .team-weaknesses {
-    background-color: rgba(0, 0, 0, 0.03);
-    padding: 12px;
-    border-radius: 10px;
-  }
-  
-  .empty-message {
-    color: var(--text-lighter);
-    font-style: italic;
     font-size: 0.9rem;
   }
   
-  /* Team Defense and Coverage styling */
-  .defensive-grid .type-box, .type-box {
-    position: relative;
-    transition: all 0.3s ease;
+  .team-container {
+    padding: 15px 10px;
   }
   
-  /* When no data (value is 0) */
-  .defensive-grid .type-box:not([class*="type-"]){
-    background-color: #f0f0f0;
-    color: var(--text-light);
-    text-shadow: none;
-    box-shadow: none;
+  .analysis-card, .team-builder-section {
+    padding: 15px;
   }
-  
-  /* Make effects more visible for non-zero values */
-  .defensive-grid .type-box[class*="type-"]{
-    transform: scale(1.05);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Effectiveness value styling based on value */
-  .effectiveness-value {
-    font-size: 1.1rem;
-    font-weight: 800;
-    margin-top: 5px;
-    background-color: rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
-    padding: 2px 8px;
-    margin: 4px -5px 0;
-    transition: all 0.3s ease;
-  }
-  
-  /* Suggestions section */
-  .suggestion-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .suggestion-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-  
-  .suggestion-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .suggestion-icon {
-    font-size: 1.4rem;
-  }
-  
-  .suggestion-text {
-    flex: 1;
-    line-height: 1.4;
-  }
-  
-  /* For empty teams or initial state */
-  .analysis-card .empty-state {
-    text-align: center;
-    padding: 20px;
-    color: var(--text-light);
-  }
-  
-  /* Make tooltips visible on hover */
-  [title] {
-    position: relative;
-    cursor: help;
-  }
-  
-  /* Animation for new suggestions */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .suggestion-item {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-  
-  .suggestion-item:nth-child(1) { animation-delay: 0s; }
-  .suggestion-item:nth-child(2) { animation-delay: 0.2s; }
-  .suggestion-item:nth-child(3) { animation-delay: 0.4s; }
+}
 
-/* ส่วน CSS เพิ่มเติมสำหรับสถิติของโปเกมอน */
-
-/* ======= Stats Display ======= */
-.quick-stats {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-    background-color: #f5f5f5;
-    padding: 12px 10px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
-    margin-top: 15px;
-  }
-  
-  .stat-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .stat-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--text-light);
-    margin-bottom: 5px;
-  }
-  
-  .stat-bar {
-    height: 6px;
-    width: 100%;
-    background: linear-gradient(to right, var(--secondary-dark), var(--secondary));
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    transition: width 0.5s ease;
-    min-width: 5%; /* Ensure a minimum width for visibility */
-  }
-  
-  .stat-value {
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-top: 5px;
-    color: var(--secondary-dark);
-  }
-  
-  /* Different colors for different stat types */
-  .stat-column:nth-child(1) .stat-bar {
-    background: linear-gradient(to right, #FF5959, #ff8080); /* HP - Red */
-  }
-  
-  .stat-column:nth-child(2) .stat-bar {
-    background: linear-gradient(to right, #F5AC78, #f7c4a3); /* Atk - Orange */
-  }
-  
-  .stat-column:nth-child(3) .stat-bar {
-    background: linear-gradient(to right, #FAE078, #f9eaae); /* Def - Yellow */
-  }
-  
-  .stat-column:nth-child(4) .stat-bar {
-    background: linear-gradient(to right, #9DB7F5, #c7d4f9); /* SpA - Blue */
-  }
-  
-  .stat-column:nth-child(5) .stat-bar {
-    background: linear-gradient(to right, #A7DB8D, #c9eab8); /* SpD - Green */
-  }
-  
-  .stat-column:nth-child(6) .stat-bar {
-    background: linear-gradient(to right, #FA92B2, #ffc3d3); /* Spd - Pink */
-  }
-  
-  /* Highlight stats that are particularly high */
-  .stat-value.high {
-    color: #2e7d32; /* Dark green for high stats */
-    font-weight: 800;
-  }
-  
-  /* Highlight stats that are particularly low */
-  .stat-value.low {
-    color: #c62828; /* Dark red for low stats */
-    font-weight: 800;
-  }
-  
-  /* Stat bar animation on Pokemon selection */
-  @keyframes statBarGrow {
-    from { width: 0; }
-    to { width: var(--target-width); }
-  }
-  
-  .pokemon-card-animated .stat-bar {
-    animation: statBarGrow 0.8s ease-out forwards;
-  }
-  
-  /* Stat bar hover effect */
-  .stat-column:hover .stat-bar {
-    transform: scaleY(1.5);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .stat-column:hover .stat-value {
-    transform: scale(1.1);
-  }
-  
-  /* Total stats indicator */
-  .total-stats {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding-top: 10px;
-    margin-top: 8px;
-    border-top: 1px dashed rgba(0, 0, 0, 0.1);
-    font-size: 0.85rem;
-    font-weight: 700;
-  }
-  
-  .total-stats span {
-    color: var(--primary);
-    font-weight: 800;
-  }
-  
-  /* Stat Comparison Indicators */
-  .stat-comparison {
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.7rem;
-    font-weight: bold;
-  }
-  
-  .stat-comparison.better {
-    color: #43a047;
-  }
-  
-  .stat-comparison.worse {
-    color: #e53935;
-  }
-  
-  /* Enhanced Stat Row */
-  .stat-row {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 8px;
-    padding: 4px 0;
-  }
-  
-  .stat-name {
-    width: 40px;
-    font-weight: 700;
-    font-size: 0.8rem;
-    text-align: right;
-  }
-  
-  .stat-bar-container {
-    flex: 1;
-    background-color: rgba(0, 0, 0, 0.05);
-    height: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .stat-number {
-    width: 30px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-align: right;
-  }
-  
-  /* Stat class indicators */
-  .stat-tier {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    margin-left: 5px;
-    display: inline-block;
-  }
-  
-  .tier-S {
-    background-color: #ff5722;
-    box-shadow: 0 0 5px #ff5722;
-  }
-  
-  .tier-A {
-    background-color: #ff9800;
-  }
-  
-  .tier-B {
-    background-color: #ffc107;
-  }
-  
-  .tier-C {
-    background-color: #8bc34a;
-  }
-  
-  .tier-D {
-    background-color: #03a9f4;
-  }
-  
-  /* Media Queries for Responsive Stats */
-  @media (max-width: 768px) {
-    .quick-stats {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, auto);
-      gap: 8px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .stat-value {
-      font-size: 0.7rem;
-    }
-    
-    .stat-label {
-      font-size: 0.7rem;
-    }
-  }
+/* ไอคอนประเภทเพิ่มเติม สำหรับอนาคต */
+.type-icon {
+  width: var(--type-icon-size);
+  height: var(--type-icon-size);
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 5px;
+  vertical-align: middle;
+}

@@ -1,89 +1,283 @@
-<form [formGroup]="teamForm" (ngSubmit)="submitTeam()">
-  <div class="team-container">
-    <h1>My Pokémon Team</h1>
+<!-- team.component.html -->
+<div class="team-container">
+  <header class="team-header">
+    <h1>Pokémon Team Builder</h1>
     <p class="sub">For Generation 6 to 9 (Scarlet/Violet)</p>
+    <div class="format-selector" [formGroup]="teamForm">
+      <select class="format-dropdown" formControlName="format">
+        <option value="vgc2024">VGC 2024</option>
+        <option value="singlesOU">Singles OU</option>
+        <option value="doubles">Doubles</option>
+        <option value="battleStadium">Battle Stadium</option>
+      </select>
+      <button class="action-button new-team" (click)="createNewTeam()">New Team</button>
+      <button class="action-button save-team" (click)="saveTeam()">Save Team</button>
+      <button class="action-button import-export" (click)="toggleImportExport()">Import/Export</button>
+    </div>
+  </header>
 
-    <div class="main-grid">
-      <!-- Team Input Area -->
-      <div class="team-input">
-        <div formArrayName="team" class="team-grid">
-          <div
-            class="team-slot"
-            *ngFor="let slot of team.controls; let i = index"
-            [formGroupName]="i"
-          >
-            <!-- Pokémon Name -->
-            <select formControlName="name">
-              <option value="">Name</option>
-              <option *ngFor="let p of pokemonList" [value]="p">
-                {{ p | titlecase }}
-              </option>
-            </select>
+  <div class="main-grid">
+    <!-- Team Input Area -->
+    <div class="team-builder-section">
+      <h2 class="section-title">Build Your Team</h2>
+      <div class="team-grid">
+        <form [formGroup]="teamForm">
+          <div formArrayName="teamMembers">
+            <div class="team-slot" *ngFor="let pokemonForm of teamMembers.controls; let i = index">
+              <div class="pokemon-card" [ngClass]="{'empty-slot': !pokemonForm.get('name')?.value, 'pokemon-card-animated': pokemonForm.get('name')?.value}" [formGroupName]="i">
+                <div class="pokemon-header">
+                  <div class="pokemon-sprite" *ngIf="pokemonForm.get('name')?.value">
+                    <img [src]="'https://play.pokemonshowdown.com/sprites/gen5/' + (pokemonForm.get('name')?.value || '').toLowerCase() + '.png'" 
+                        [alt]="pokemonForm.get('name')?.value || ''" 
+                        onerror="this.src='assets/img/pokemon-placeholder.png';">
+                  </div>
+                  <div class="pokemon-selector">
+                    <select formControlName="name" (change)="updatePokemonTypes(i)" class="pokemon-select">
+                      <option value="">Select Pokémon</option>
+                      <option *ngFor="let p of pokemonList" [value]="p">{{ p }}</option>
+                    </select>
+                  </div>
+                </div>
 
-            <!-- Pokémon Moves -->
-            <div formArrayName="moves">
-              <div *ngFor="let move of getMoves(i).controls; let j = index">
-                <select [formControlName]="j">
-                  <option value="">Move</option>
-                  <option *ngFor="let m of moveList" [value]="m">{{ m }}</option>
-                </select>
+                <div class="pokemon-details" *ngIf="pokemonForm.get('name')?.value">
+                  <div class="type-badges">
+                    <span *ngFor="let type of getPokemonTypes(i)" class="type-badge {{'type-' + type.toLowerCase()}}">{{type}}</span>
+                  </div>
+                  
+                  <div class="ability-item-row">
+                    <select formControlName="ability" class="ability-select">
+                      <option value="">Ability</option>
+                      <option *ngFor="let a of getAbilitiesForPokemon(i)" [value]="a">{{ a }}</option>
+                    </select>
+                    
+                    <select formControlName="item" class="item-select">
+                      <option value="">Held Item</option>
+                      <option *ngFor="let item of itemList" [value]="item">{{ item }}</option>
+                    </select>
+                  </div>
+                  
+                  <div class="moves-container" formArrayName="moves">
+                    <div *ngFor="let move of getPokemonMoves(i).controls; let j = index" class="move-row">
+                      <select [formControlName]="j" class="move-select">
+                        <option value="">Move {{j+1}}</option>
+                        <option *ngFor="let m of getMovesForPokemon(i)" [value]="m">{{ m }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="quick-stats">
+                    <div class="stat-column">
+                      <span class="stat-label">HP</span>
+                      <span class="stat-bar" [style.width.%]="getStatPercentage(pokemonForm.get('name')?.value || '', 'hp')"></span>
+                      <span class="stat-value" [ngClass]="getStatValueClass(pokemonForm.get('name')?.value || '', 'hp')">
+                        {{ getStatValue(pokemonForm.get('name')?.value || '', 'hp') }}
+                      </span>
+                    </div>
+                    <div class="stat-column">
+                      <span class="stat-label">Atk</span>
+                      <span class="stat-bar" [style.width.%]="getStatPercentage(pokemonForm.get('name')?.value || '', 'attack')"></span>
+                      <span class="stat-value" [ngClass]="getStatValueClass(pokemonForm.get('name')?.value || '', 'attack')">
+                        {{ getStatValue(pokemonForm.get('name')?.value || '', 'attack') }}
+                      </span>
+                    </div>
+                    <div class="stat-column">
+                      <span class="stat-label">Def</span>
+                      <span class="stat-bar" [style.width.%]="getStatPercentage(pokemonForm.get('name')?.value || '', 'defense')"></span>
+                      <span class="stat-value" [ngClass]="getStatValueClass(pokemonForm.get('name')?.value || '', 'defense')">
+                        {{ getStatValue(pokemonForm.get('name')?.value || '', 'defense') }}
+                      </span>
+                    </div>
+                    <div class="stat-column">
+                      <span class="stat-label">SpA</span>
+                      <span class="stat-bar" [style.width.%]="getStatPercentage(pokemonForm.get('name')?.value || '', 'specialAttack')"></span>
+                      <span class="stat-value" [ngClass]="getStatValueClass(pokemonForm.get('name')?.value || '', 'specialAttack')">
+                        {{ getStatValue(pokemonForm.get('name')?.value || '', 'specialAttack') }}
+                      </span>
+                    </div>
+                    <div class="stat-column">
+                      <span class="stat-label">SpD</span>
+                      <span class="stat-bar" [style.width.%]="getStatPercentage(pokemonForm.get('name')?.value || '', 'specialDefense')"></span>
+                      <span class="stat-value" [ngClass]="getStatValueClass(pokemonForm.get('name')?.value || '', 'specialDefense')">
+                        {{ getStatValue(pokemonForm.get('name')?.value || '', 'specialDefense') }}
+                      </span>
+                    </div>
+                    <div class="stat-column">
+                      <span class="stat-label">Spd</span>
+                      <span class="stat-bar" [style.width.%]="getStatPercentage(pokemonForm.get('name')?.value || '', 'speed')"></span>
+                      <span class="stat-value" [ngClass]="getStatValueClass(pokemonForm.get('name')?.value || '', 'speed')">
+                        {{ getStatValue(pokemonForm.get('name')?.value || '', 'speed') }}
+                      </span>
+                    </div>
+                    <div class="total-stats" *ngIf="pokemonForm.get('name')?.value">
+                      BST: <span>{{ calculateTotalStats(pokemonForm.get('name')?.value || '') }}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="empty-slot-message" *ngIf="!pokemonForm.get('name')?.value">
+                  <span class="add-pokemon-icon">+</span>
+                  <span>Add Pokémon</span>
+                </div>
               </div>
             </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Analysis Area -->
+    <div class="analysis-area">
+      <div class="analysis-card team-overview">
+        <h3>Team Overview</h3>
+        <div class="team-summary">
+          <div class="team-strength-weakness">
+            <div class="team-strengths">
+              <h4>Team Strengths</h4>
+              <div class="type-tags">
+                <span class="type-tag" *ngFor="let type of teamStrengths" [ngClass]="'type-' + type.toLowerCase()">
+                  {{ type }}
+                </span>
+                <span *ngIf="teamStrengths.length === 0" class="empty-message">No data yet</span>
+              </div>
+            </div>
+            <div class="team-weaknesses">
+              <h4>Team Weaknesses</h4>
+              <div class="type-tags">
+                <span class="type-tag" *ngFor="let type of teamWeaknesses" [ngClass]="'type-' + type.toLowerCase()">
+                  {{ type }}
+                </span>
+                <span *ngIf="teamWeaknesses.length === 0" class="empty-message">No data yet</span>
+              </div>
+            </div>
+          </div>
 
-            <!-- Item -->
-            <select formControlName="item">
-              <option value="">Item</option>
-              <option *ngFor="let i of itemList" [value]="i">{{ i }}</option>
-            </select>
-
-            <!-- Ability -->
-            <select formControlName="ability">
-              <option value="">Ability</option>
-              <option *ngFor="let a of abilityList" [value]="a">{{ a }}</option>
-            </select>
+          <div class="team-stat-summary" *ngIf="hasTeamMembers()">
+            <h4>Team Stats Average</h4>
+            <div class="team-stat-bars">
+              <div class="stat-row">
+                <div class="stat-name">HP</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('hp')" 
+                        [style.background]="getStatBarColor('hp')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().hp | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">Atk</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('attack')" 
+                        [style.background]="getStatBarColor('attack')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().attack | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">Def</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('defense')" 
+                        [style.background]="getStatBarColor('defense')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().defense | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">SpA</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('specialAttack')" 
+                        [style.background]="getStatBarColor('specialAttack')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().specialAttack | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">SpD</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('specialDefense')" 
+                        [style.background]="getStatBarColor('specialDefense')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().specialDefense | number:'1.0-0' }}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-name">Spd</div>
+                <div class="stat-bar-container">
+                  <span class="stat-bar" [style.width.%]="getTeamStatPercentage('speed')" 
+                        [style.background]="getStatBarColor('speed')"></span>
+                </div>
+                <div class="stat-number">{{ getTeamStatAverages().speed | number:'1.0-0' }}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Analysis Area -->
-      <div class="analysis-area">
-        <div class="analysis-card">
-          <h3>Team Defence</h3>
-          <div class="type-grid">
-            <div class="type-box" *ngFor="let t of types">
-              {{ t | titlecase }}<br />0
-            </div>
+      
+      <div class="analysis-card">
+        <h3>Team Defense</h3>
+        <div class="type-grid defensive-grid">
+          <div class="type-box" *ngFor="let t of types" 
+               [ngClass]="getTypeBoxClass(t, teamDefense[t])" 
+               [title]="getTypeDefenseTooltip(t)">
+            {{ t }}
+            <div class="effectiveness-value">{{ teamDefense[t] || 0 }}</div>
           </div>
         </div>
-
-        <div class="analysis-card">
-          <h3>Team Type Coverage</h3>
-          <div class="type-grid">
-            <div class="type-box" *ngFor="let t of types">
-              {{ t | titlecase }}<br />0
-            </div>
+      </div>
+      
+      <div class="analysis-card suggestions">
+        <h3>Team Suggestions</h3>
+        <div class="suggestion-list">
+          <div class="suggestion-item" *ngFor="let suggestion of teamSuggestions">
+            <span class="suggestion-icon">{{ suggestion.icon }}</span>
+            <span class="suggestion-text">{{ suggestion.text }}</span>
+          </div>
+          <div class="suggestion-item" *ngIf="teamSuggestions.length === 0">
+            <span class="suggestion-icon">💡</span>
+            <span class="suggestion-text">Add Pokémon to your team to see suggestions.</span>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Filters and Footer -->
-    <div class="filters-section">
-      <div class="filters-tabs">
-        <button class="active" type="button">Search Filters</button>
-        <button type="button">Team Checklist</button>
-        <button type="button">Save/Load Team</button>
-      </div>
-      <div class="filters-controls">
-        <select><option>Format</option></select>
-        <select><option>Type</option></select>
-        <select><option>Region</option></select>
-        <select><option>Move</option></select>
-      </div>
-    </div>
   </div>
-
-  <div style="text-align: center; margin-top: 20px;">
-    <button type="submit">Submit Team</button>
+  
+  <!-- Filters and Advanced Options -->
+  <div class="advanced-section">
+    <form [formGroup]="filtersForm" class="filters-panel active-panel">
+      <div class="filter-group">
+        <div class="filter-row">
+          <div class="filter-column">
+            <label>Format</label>
+            <select formControlName="selectedFormat">
+              <option value="">All Formats</option>
+              <option value="vgc2024">VGC 2024</option>
+              <option value="singlesOU">Singles OU</option>
+            </select>
+          </div>
+          
+          <div class="filter-column">
+            <label>Type</label>
+            <select formControlName="selectedType">
+              <option value="">Any Type</option>
+              <option *ngFor="let t of types" [value]="t">{{t}}</option>
+            </select>
+          </div>
+          
+          <div class="filter-column">
+            <label>Generation</label>
+            <select formControlName="selectedGeneration">
+              <option value="">All Gens</option>
+              <option value="gen9">Gen 9 (SV)</option>
+              <option value="gen8">Gen 8 (SWSH)</option>
+              <option value="gen7">Gen 7 (SM/USUM)</option>
+              <option value="gen6">Gen 6 (XY/ORAS)</option>
+            </select>
+          </div>
+          
+          <div class="filter-column">
+            <label>Search</label>
+            <input type="text" formControlName="searchQuery" placeholder="Search Pokémon, moves, abilities..." class="search-input">
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
-</form>
+  
+  <footer class="team-footer">
+    <p class="footer-copyright">© 2025 Pokémon Team Builder. This site is not affiliated with Pokémon, Nintendo, or Game Freak.</p>
+  </footer>
+</div>
